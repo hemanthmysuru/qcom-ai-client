@@ -1,0 +1,11 @@
+{
+    "LIST": [
+        "READ"
+    ],
+    "USER": [
+        "CREATE",
+        "UPDATE",
+        "DELETE",
+        "READ"
+    ]
+}

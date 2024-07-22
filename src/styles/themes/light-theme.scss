@@ -1,0 +1,34 @@
+// src/styles/themes/light-theme.scss
+
+:root {
+    --primary-color: #3253dc;
+    --primary-color-dark: #203ebb;
+    --primary-color-light: #e0e5fa;
+    --secondary-color: #dc004e;
+    --background-color: #f5f5f5;
+    --text-color: #333;
+
+    --divider-border-color: rgba(0, 0, 0, 0.12);
+
+    // Header Colors
+    --header-bg-color: #0d1826;
+    --header-txt-color: #6fb5ce;
+    --header-selected-nav-link-bg-color: #204b81;
+    --header-selected-nav-link-txt-color: #ffffff;
+
+    // Footer Colors
+    --footer-background-color: #eeeeee;
+    --footer-text-color: #111111;
+
+    // Additional Colors
+    --warning-color: #e38e3f;
+    --success-color: #7e90eb;
+    --danger-color: #ff7d7d;
+    --gray-color: #6c757d;
+    --white-color: #ffffff;
+    --black-color: #000000;
+
+    --dialogbox-bg-color: var(--white-color);
+    --dialogbox-outline-btn-hover-bg: #e0e5fa;
+    --dialogbox-txt-color: var(--text-color);
+}

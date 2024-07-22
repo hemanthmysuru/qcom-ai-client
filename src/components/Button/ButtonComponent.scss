@@ -1,0 +1,74 @@
+// AppButton.scss
+.app-button {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    padding: 0 16px; // Default padding, adjust if necessary
+    border-radius: 24px;
+    transition:
+        background-color 0.3s,
+        color 0.3s;
+    min-height: 32px;
+
+    &.blue {
+        background-color: blue;
+        color: white;
+    }
+
+    &.transparent {
+        background-color: transparent;
+        border: 2px solid blue;
+        color: blue;
+    }
+
+    &.icon-only {
+        min-width: 32px;
+        min-height: 32px;
+        padding: 0; // Remove padding for icon-only buttons
+        border-radius: 50%; // Ensure circular shape for icon-only buttons
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    .icon {
+        // Apply margin-right only if the button has both icon and text
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        &.has-text {
+            margin-right: 8px;
+        }
+    }
+
+    .text {
+        display: inline;
+    }
+
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.3);
+        pointer-events: none;
+        transform: scale(0);
+        animation: ripple-animation 0.6s linear;
+    }
+
+    @keyframes ripple-animation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+}

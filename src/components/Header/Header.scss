@@ -1,0 +1,51 @@
+@import "../../styles/variables";
+
+$headerHeight: 68px;
+
+.protected-header {
+    background: var(--header-bg-color);
+    color: var(--header-txt-color);
+    .logo-and-app-name {
+        display: flex;
+        column-gap: $spacing-small;
+    }
+    .navbar-and-silhouette {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        nav {
+            display: flex;
+            // column-gap: $spacing-small;
+            // flex-direction: row;
+            // align-content: center;
+            // justify-content: center;
+            // align-items: center;
+            a {
+                height: $headerHeight;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                color: var(--header-txt-color);
+                column-gap: 4px;
+                padding: 0px $spacing-small;
+                text-decoration: none;
+                transition: all 0.3s ease-in-out;
+                text-transform: capitalize;
+                cursor: pointer;
+                // font-size: $font-size-small;
+
+                label {
+                    cursor: pointer;
+                }
+
+                &:hover {
+                    background: var(--header-selected-nav-link-bg-color);
+                    color: var(--header-selected-nav-link-txt-color);
+                }
+            }
+        }
+    }
+}

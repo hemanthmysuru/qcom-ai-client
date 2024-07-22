@@ -1,0 +1,86 @@
+@import "../../styles/variables";
+
+// Primary color
+// $primary-color: #3253dc;
+// $primary-color-light: lighten($primary-color, 40%); // Lighter version for hover effects
+
+// Warning color
+$warning-color: #e38e3f;
+$success-color: #3253dc;
+$error-color: #ff4a4a;
+
+:local {
+    .button {
+        font-size: 1.4rem !important;
+        font-weight: 400 !important;
+        text-transform: none !important;
+        border-radius: 20px !important;
+        min-height: 40px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 16px;
+        border: none;
+        transition:
+            background-color 0.3s ease,
+            border-color 0.3s ease;
+
+        &.contained {
+            background-color: var(--primary-color);
+            color: white;
+
+            &:hover {
+                background-color: var(--primary-color-dark);
+            }
+        }
+
+        &.outlined {
+            border: 2px solid var(--primary-color) !important;
+            color: var(--primary-color);
+            background-color: transparent;
+
+            &:hover {
+                background-color: var(--primary-color-light);
+            }
+        }
+
+        &.warning {
+            background-color: $warning-color;
+            color: white;
+
+            &:hover {
+                background-color: darken($warning-color, 10%);
+            }
+        }
+
+        &.success {
+            background-color: $success-color;
+            color: white;
+
+            &:hover {
+                background-color: darken($success-color, 10%);
+            }
+        }
+
+        &.error {
+            background-color: $error-color;
+            color: white;
+
+            &:hover {
+                background-color: darken($error-color, 10%);
+            }
+        }
+    }
+
+    .iconOnly {
+        border-radius: 50%; // Fully rounded for icon-only buttons
+        min-width: 40px;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); // Shadow for icon-only buttons
+        background-color: transparent; // No background
+        border: none; // No border
+    }
+}

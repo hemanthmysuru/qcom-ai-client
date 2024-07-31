@@ -5,17 +5,19 @@
 // $primary-color-light: lighten($primary-color, 40%); // Lighter version for hover effects
 
 // Warning color
-$warning-color: #e38e3f;
-$success-color: #3253dc;
-$error-color: #ff4a4a;
+// $warning-color: #e38e3f;
+// $success-color: #3253dc;
+// $error-color: #ff4a4a;
+
+$buttonSize: 32px;
 
 :local {
     .button {
-        font-size: 1.4rem !important;
-        font-weight: 400 !important;
+        font-size: 1.4rem;
+        font-weight: 400;
         text-transform: none !important;
         border-radius: 20px !important;
-        min-height: 40px;
+        height: $buttonSize;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         display: inline-flex;
         align-items: center;
@@ -46,38 +48,37 @@ $error-color: #ff4a4a;
         }
 
         &.warning {
-            background-color: $warning-color;
+            background-color: var(--warning-color);
             color: white;
 
             &:hover {
-                background-color: darken($warning-color, 10%);
+                background-color: var(--warning-dark-color);
             }
         }
 
         &.success {
-            background-color: $success-color;
+            background-color: var(--success-color);
             color: white;
 
             &:hover {
-                background-color: darken($success-color, 10%);
+                background-color: var(--success-dark-color);
             }
         }
 
         &.error {
-            background-color: $error-color;
+            background-color: var(--error-color);
             color: white;
 
             &:hover {
-                background-color: darken($error-color, 10%);
+                background-color: var(--error-dark-color);
             }
         }
     }
 
     .iconOnly {
         border-radius: 50%; // Fully rounded for icon-only buttons
-        min-width: 40px;
-        width: 40px;
-        height: 40px;
+        width: $buttonSize;
+        height: $buttonSize;
         padding: 0;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); // Shadow for icon-only buttons
         background-color: transparent; // No background

@@ -12,12 +12,13 @@ import { Divider } from '@mui/material';
 // Define the props interface for the dialog component
 interface CustomDialogProps {
     open: boolean;
-    onClose: () => void;
     content: React.ReactNode;
-    onCancel: () => void;
-    onSave: () => void;
     cancelText?: string;
     saveText?: string;
+    dialogMaxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    onClose: () => void;
+    onCancel: () => void;
+    onSave: () => void;
 }
 
 const CustomDialog: React.FC<CustomDialogProps> = ({
@@ -26,6 +27,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({
     content,
     onCancel,
     onSave,
+    dialogMaxWidth = 'sm',
     cancelText = 'Cancel',
     saveText = 'Save',
 }) => {
@@ -34,7 +36,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({
             open={open}
             onClose={onClose}
             fullWidth
-            maxWidth="sm"
+            maxWidth={dialogMaxWidth}
             classes={{
                 paper: styles.dialogPaper,
             }}
@@ -46,7 +48,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({
                 </IconButton>
             </DialogTitle>
             <Divider className={styles.divider} />
-            <DialogContent>
+            <DialogContent className={styles.dialogContent}>
                 {content}
             </DialogContent>
             <Divider className={styles.divider} />

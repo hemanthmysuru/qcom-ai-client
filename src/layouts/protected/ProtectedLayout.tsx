@@ -18,10 +18,10 @@ const ProtectedLayout: React.FC = () => {
         <section className="layout protected">
             <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
                 <Header />
-                <header>
+                {/* <header>
                     <h1>Protected layout</h1>
-                </header>
-                <main>
+                </header> */}
+                <main style={{ height: `calc(100vh - 68px)` }}>
                     <Outlet />
                 </main>
 

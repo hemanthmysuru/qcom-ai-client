@@ -8,6 +8,10 @@ $headerHeight: 68px;
     .logo-and-app-name {
         display: flex;
         column-gap: $spacing-small;
+
+        figcaption {
+            font-size: $font-size-base;
+        }
     }
     .navbar-and-silhouette {
         display: flex;
@@ -35,7 +39,7 @@ $headerHeight: 68px;
                 transition: all 0.3s ease-in-out;
                 text-transform: capitalize;
                 cursor: pointer;
-                // font-size: $font-size-small;
+                font-size: $font-size-base;
 
                 label {
                     cursor: pointer;

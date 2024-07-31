@@ -35,6 +35,10 @@ $dialogbox-bg-color: var(--dialogbox-bg-color);
     }
 }
 
+.dialogContent {
+    padding: 0 !important;
+}
+
 .dialogActions {
     display: flex;
     justify-content: flex-end;

@@ -1,0 +1,99 @@
+@import "../../styles/variables";
+
+.even-counter-bar {
+    // border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 24px;
+    width: fit-content;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background-color: var(--eventcountbar-bg-color);
+    margin: auto;
+
+    li {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        column-gap: 4px;
+
+        header {
+            h4,
+            h5 {
+                margin: 0;
+            }
+
+            h4 {
+                font-size: $font-size-large;
+                font-weight: 700;
+                line-height: 21px;
+                color: var(--eventcountbar-header-text-color);
+            }
+
+            h5 {
+                font-size: $font-size-xsmall;
+                font-weight: 600;
+                line-height: 16px;
+                color: var(--eventcountbar-subheader-text-color);
+            }
+        }
+
+        &:nth-child(1) {
+            button {
+                background-color: $eventcountbar-index-1-icon-bg-color;
+                &:hover {
+                    background-color: darken($eventcountbar-index-1-icon-bg-color, 10);
+                }
+            }
+        }
+
+        &:nth-child(2) {
+            button {
+                background-color: $eventcountbar-index-2-icon-bg-color;
+                &:hover {
+                    background-color: darken($eventcountbar-index-2-icon-bg-color, 10%);
+                }
+            }
+        }
+
+        &:nth-child(3) {
+            button {
+                background-color: $eventcountbar-index-3-icon-bg-color;
+                &:hover {
+                    background-color: darken($eventcountbar-index-3-icon-bg-color, 10%);
+                }
+            }
+        }
+
+        &:nth-child(4) {
+            button {
+                background-color: $eventcountbar-index-4-icon-bg-color;
+                &:hover {
+                    background-color: darken($eventcountbar-index-4-icon-bg-color, 10%);
+                }
+            }
+        }
+
+        &:nth-child(5) {
+            button {
+                background-color: $eventcountbar-index-5-icon-bg-color;
+                &:hover {
+                    background-color: darken($eventcountbar-index-5-icon-bg-color, 10%);
+                }
+            }
+        }
+
+        &:nth-child(6) {
+            button {
+                background-color: $eventcountbar-index-6-icon-bg-color;
+                &:hover {
+                    background-color: darken($eventcountbar-index-6-icon-bg-color, 10%);
+                }
+            }
+        }
+    }
+}

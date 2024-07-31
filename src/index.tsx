@@ -6,23 +6,23 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-
-// import '@fontsource/roboto/300.css';
-// import '@fontsource/roboto/400.css';
-// import '@fontsource/roboto/500.css';
-// import '@fontsource/roboto/700.css';
-
+import { Provider } from 'react-redux';
+import store from './sdk/redux/store/store';
+import AppInit from './AppInit';
+import "./styles/_scrollbar.scss";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <React.StrictMode>
-        <AuthProvider>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </AuthProvider>
+        <Provider store={store}>
+            <AuthProvider>
+                <BrowserRouter>
+                    <AppInit />
+                </BrowserRouter>
+            </AuthProvider>
+        </Provider>
     </React.StrictMode>
 );
 

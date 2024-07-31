@@ -6,7 +6,10 @@
     --primary-color-light: #e0e5fa;
     --secondary-color: #dc004e;
     --background-color: #f5f5f5;
-    --text-color: #333;
+    --text-color: #323232;
+    --text-color-light-3x: #424141;
+    --text-color-light-5x: #828282;
+    --text-color-light-6x: #8693a8;
 
     --divider-border-color: rgba(0, 0, 0, 0.12);
 
@@ -22,8 +25,12 @@
 
     // Additional Colors
     --warning-color: #e38e3f;
-    --success-color: #7e90eb;
-    --danger-color: #ff7d7d;
+    --warning-dark-color: #d1741e;
+    --success-color: #3253dc;
+    --success-dark-color: #203ebb;
+    --error-color: #ff4a4a;
+    --error-dark-color: #ff1717;
+
     --gray-color: #6c757d;
     --white-color: #ffffff;
     --black-color: #000000;
@@ -31,4 +38,26 @@
     --dialogbox-bg-color: var(--white-color);
     --dialogbox-outline-btn-hover-bg: #e0e5fa;
     --dialogbox-txt-color: var(--text-color);
+
+    // dark
+    // --alertbox-bg-color: rgba(0, 0, 0, 0.8);
+    // --alertbox-border-color: rgba(0, 0, 0, 0.8);
+    // --alertbox-header-color: var(--white-color);
+    // --alertbox-subheader-color: var(--text-color-light-6x);
+    // --alertbox-subheader-icon-color: var(--primary-color);
+    // --alertbox-footer-label-color: var(--white-color);
+    // --alertbox-footer-time-color: var(--text-color-light-4x);
+
+    // light
+    --alertbox-bg-color: rgba(255, 255, 255);
+    --alertbox-border-color: var(--divider-border-color);
+    --alertbox-header-color: var(--text-color);
+    --alertbox-subheader-color: var(--text-color-light-5x);
+    --alertbox-subheader-icon-color: var(--primary-color);
+    --alertbox-footer-label-color: var(--text-color);
+    --alertbox-footer-time-color: var(--text-color-light-3x);
+
+    --eventcountbar-bg-color: #eaf3ff;
+    --eventcountbar-header-text-color: var(--text-color);
+    --eventcountbar-subheader-text-color: var(--text-color);
 }

@@ -6,9 +6,12 @@
     --primary-color-light: #e0e5fa;
     --secondary-color: #dc004e;
     --background-color: #f5f5f5;
-    --text-color: #333;
+    --text-color: #323232;
+    --text-color-light-3x: #424141;
+    --text-color-light-5x: #828282;
+    --text-color-light-6x: #8693a8;
 
-    --divider-border-color: rgb(140 140 140 / 12%);
+    --divider-border-color: rgb(140 140 140 / 24%);
 
     // Header Colors
     --header-bg-color: #0d1826;
@@ -22,9 +25,11 @@
 
     // Additional Colors
     --warning-color: #e38e3f;
-    --warning-dark-color: #e38e3f;
+    --warning-dark-color: #d1741e;
     --success-color: #3253dc;
+    --success-dark-color: #203ebb;
     --error-color: #ff4a4a;
+    --error-dark-color: #ff1717;
 
     --gray-color: #6c757d;
     --white-color: #ffffff;
@@ -33,4 +38,26 @@
     --dialogbox-bg-color: #0d0d0d;
     --dialogbox-outline-btn-hover-bg: #201f1f;
     --dialogbox-txt-color: var(--white-color);
+
+    // dark
+    --alertbox-bg-color: rgba(0, 0, 0, 0.8);
+    --alertbox-border-color: rgba(0, 0, 0, 0.8);
+    --alertbox-header-color: var(--white-color);
+    --alertbox-subheader-color: var(--text-color-light-6x);
+    --alertbox-subheader-icon-color: var(--primary-color);
+    --alertbox-footer-label-color: var(--white-color);
+    --alertbox-footer-time-color: var(--text-color-light-6x);
+
+    // light
+    // --alertbox-bg-color: rgba(255, 255, 255);
+    // --alertbox-border-color: rgba(0, 0, 0, 0.8);
+    // --alertbox-header-color: var(--text-color);
+    // --alertbox-subheader-color: var(--text-color-light-5x);
+    // --alertbox-subheader-icon-color: var(--primary-color);
+    // --alertbox-footer-label-color: var(--text-color);
+    // --alertbox-footer-time-color: var(--text-color-light-3x);
+
+    --eventcountbar-bg-color: #151515e6;
+    --eventcountbar-header-text-color: var(--white-color);
+    --eventcountbar-subheader-text-color: var(--text-color-light-6x);
 }

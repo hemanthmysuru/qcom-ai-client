@@ -1,0 +1,17 @@
+.alerts-page {
+    height: 100%;
+}
+.dialog-content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    column-gap: 16px;
+    padding: 16px;
+
+    .side-content {
+    }
+
+    .main-content {
+    }
+}

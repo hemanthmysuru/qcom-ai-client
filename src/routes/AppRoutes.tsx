@@ -7,6 +7,7 @@ import AdminPage from "../pages/Admin/AdminPage";
 import { useAuth } from "../context/AuthContext";
 import PublicLayout from "../layouts/public/PublicLayout";
 import ProtectedLayout from "../layouts/protected/ProtectedLayout";
+import AlertsPage from "../pages/Alerts/AlertsPage";
 
 const AppRoutes: React.FC = () => {
     // const isAuthenticated = true; // Replace with actual authentication logic
@@ -26,13 +27,15 @@ const AppRoutes: React.FC = () => {
             </Route>
 
             <Route element={<ProtectedLayout />}>
-                <Route path="dashboard" element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+                <Route path="alerts" element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
                     {/* <Route index element={<DashboardPage />} /> */}
-                    <Route index element={<HomePage />} />
+                    <Route index element={<AlertsPage />} />
                 </Route>
 
                 <Route path="admin" element={<ProtectedRoute isAuthenticated={isAuthenticated} requiredPermission="admin" userPermissions={userPermissions} />}>
                     <Route index element={<AdminPage />} />
+                    {/* <Route index element={<AlertsPage />} /> */}
+                    {/* <Route path="alerts" element={<AlertsPage />} /> */}
                     {/* <Route index element={<AdminPage />} />
                     <Route path="overview" element={<Overview />} />
                     <Route path="settings" element={<Settings />} /> */}

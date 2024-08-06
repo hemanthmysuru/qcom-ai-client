@@ -20,12 +20,12 @@ const Expandableitems = [
 ];
 
 const eventCounterList: IEventCounter[] = [
-    { count: 54, icon: 'gpp_good', name: 'Safety Infraction' },
-    { count: 10, icon: 'engineering', name: 'PPE - No hard hat' },
-    { count: 54, icon: 'bed', name: 'PPE - No safty vest' },
-    { count: 54, icon: 'settings', name: 'PPE - No mask' },
-    { count: 9, icon: 'delete', name: 'Fall detection' },
-    { count: 188, icon: 'home', name: 'Proximity to run equipment' },
+    { count: 54, icon: 'safetyInfractions', name: 'Safety Infraction' },
+    { count: 10, icon: 'ppeNoHardHat', name: 'PPE - No hard hat' },
+    { count: 54, icon: 'ppeNoSafetyVest', name: 'PPE - No safty vest' },
+    { count: 54, icon: 'ppeNoMask', name: 'PPE - No mask' },
+    { count: 9, icon: 'fallDetection', name: 'Fall detection' },
+    { count: 188, icon: 'proximityToRunningEquipment', name: 'Proximity to run equipment' },
 ];
 
 const AlertsPage: React.FC = () => {
@@ -36,7 +36,9 @@ const AlertsPage: React.FC = () => {
     }
 
     const listContent = (
-        <ExpandableAlertList items={Expandableitems} onAlertViewDetailsClick={handleAlertViewDetailsClick} />
+        <>
+            <ExpandableAlertList items={Expandableitems} onAlertViewDetailsClick={handleAlertViewDetailsClick} />
+        </>
     );
 
     const dialogContent = (

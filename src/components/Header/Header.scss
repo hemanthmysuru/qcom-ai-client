@@ -1,6 +1,5 @@
 @import "../../styles/variables";
-
-$headerHeight: 68px;
+@import "../../styles/mixins";
 
 .protected-header {
     background: var(--header-bg-color);
@@ -9,23 +8,25 @@ $headerHeight: 68px;
         display: flex;
         column-gap: $spacing-small;
 
+        img {
+            height: 32px;
+        }
+
         figcaption {
             font-size: $font-size-base;
         }
     }
     .navbar-and-silhouette {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
+        // display: flex;
+        // flex-direction: row;
+        // justify-content: center;
+        // align-items: center;
+        @include flex-row();
+        column-gap: 64px;
 
         nav {
             display: flex;
-            // column-gap: $spacing-small;
-            // flex-direction: row;
-            // align-content: center;
-            // justify-content: center;
-            // align-items: center;
+
             a {
                 height: $headerHeight;
                 display: flex;
@@ -33,22 +34,78 @@ $headerHeight: 68px;
                 justify-content: center;
                 align-items: center;
                 color: var(--header-txt-color);
-                column-gap: 4px;
+                column-gap: 8px;
                 padding: 0px $spacing-small;
                 text-decoration: none;
-                transition: all 0.3s ease-in-out;
+                // transition: all 0.3s ease-in-out;
                 text-transform: capitalize;
                 cursor: pointer;
                 font-size: $font-size-base;
+                background: transparent;
+
+                svg path {
+                    fill: var(--header-txt-color);
+                    stroke: var(--header-txt-color);
+                    transition: all 0.3s ease-in-out;
+                }
 
                 label {
+                    letter-spacing: 0.5px;
                     cursor: pointer;
                 }
 
-                &:hover {
+                &:hover,
+                &.selected {
                     background: var(--header-selected-nav-link-bg-color);
                     color: var(--header-selected-nav-link-txt-color);
+
+                    svg path {
+                        fill: var(--header-selected-nav-link-txt-color);
+                        stroke: var(--header-selected-nav-link-txt-color);
+                    }
                 }
+            }
+        }
+
+        .user-info {
+            @include flex-row();
+            column-gap: 8px;
+            cursor: pointer;
+            .silhouette-and-info {
+                @include flex-row();
+                column-gap: 8px;
+                .silhouette {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background-color: rgba(46, 55, 101, 1);
+                    color: #fff;
+                    font-size: $font-size-base;
+                    font-weight: 500;
+                    letter-spacing: 0.4px;
+
+                    @include flex-row();
+                }
+                .info {
+                    @include flex-column(flex-start);
+                    label {
+                        font-size: $font-size-small;
+                        font-weight: 500;
+                        cursor: pointer;
+                        line-height: 21px;
+                        letter-spacing: 0.1px;
+                    }
+                    span {
+                        font-size: $font-size-xsmall;
+                        font-weight: 600;
+                        line-height: 18px;
+                        letter-spacing: 0.1px;
+                    }
+                }
+            }
+            .action-arrow {
+                width: 24px;
+                height: 24px;
             }
         }
     }

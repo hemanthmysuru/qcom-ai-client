@@ -1,0 +1,82 @@
+@import "../../styles/main.scss";
+
+$headerHeight: 64px;
+$silhouetteSize: 40px;
+
+@mixin flex-row($justifyContent: center) {
+    display: flex;
+    flex-direction: row;
+    justify-content: $justifyContent;
+    align-items: center;
+}
+
+.main-header {
+    height: $headerHeight;
+    background: var(--header-bg-color);
+    color: var(--header-txt-color);
+    padding: $padding-horizontal;
+    @include flex-row(space-between);
+
+    .logo {
+        display: flex;
+        column-gap: $spacing-small;
+    }
+
+    .nav-and-user-info {
+        @include flex-row();
+        nav {
+            @include flex-row();
+
+            a {
+                @include flex-row();
+                height: $headerHeight;
+                color: var(--header-txt-color);
+                column-gap: 8px;
+                padding: 0px $spacing-small;
+                text-decoration: none;
+                // transition: all 0.3s ease-in-out;
+                text-transform: capitalize;
+                cursor: pointer;
+                font-size: $font-size-base;
+                background: transparent;
+
+                svg path {
+                    fill: var(--header-txt-color);
+                    stroke: var(--header-txt-color);
+                    transition: all 0.3s ease-in-out;
+                }
+
+                label {
+                    cursor: pointer;
+                }
+
+                &:hover,
+                &.selected {
+                    background: var(--header-selected-nav-link-bg-color);
+                    color: var(--header-selected-nav-link-txt-color);
+
+                    svg path {
+                        fill: var(--header-selected-nav-link-txt-color);
+                        stroke: var(--header-selected-nav-link-txt-color);
+                    }
+                }
+            }
+        }
+
+        .user-info {
+            @include flex-row();
+            .silhouette {
+                width: $silhouetteSize;
+                height: $silhouetteSize;
+                border-radius: 50%;
+            }
+
+            .info {
+                h3 {
+                }
+                h5 {
+                }
+            }
+        }
+    }
+}

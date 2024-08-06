@@ -1,0 +1,8 @@
+@import "../../styles/main";
+@import "../../styles/mixins";
+
+.app-footer {
+    height: $footerHeight;
+    background-color: var(--footer-bg-color);
+    @include flex-row();
+}

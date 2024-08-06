@@ -7,10 +7,11 @@ import styles from './CustomButton.module.scss';
 
 interface CustomButtonProps {
     text?: string;
-    icon?: string; // Name of the Material-UI icon
+    icon?: React.ReactNode | string; // Name of the Material-UI icon
     iconPosition?: 'start' | 'end'; // Position of the icon
     variant?: 'contained' | 'outlined' | 'text'; // Button variant
-    type?: 'primary' | 'warning' | 'success' | 'error'; // Button type
+    type?: 'button' | 'submit';
+    btnType?: 'primary' | 'warning' | 'success' | 'error'; // Button type
     className?: string;
     sx?: SxProps<Theme>; // Style overrides
     onClick?: () => void;
@@ -21,7 +22,8 @@ const CustomButton: React.FC<CustomButtonProps> = ({
     icon,
     iconPosition = 'start',
     variant = 'contained',
-    type = 'primary',
+    type = 'button',
+    btnType = 'primary',
     className = '',
     sx,
     onClick,
@@ -32,7 +34,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 
     // Combine classes based on type and variant
     // const buttonClass = `${styles.button} ${styles[variant]} ${styles[type]} ${isIconOnly ? styles.iconOnly : ''}`;
-    const buttonClass = `${styles.button} ${styles[variant]} ${styles[type]} ${className}`;
+    const buttonClass = `${styles.button} ${styles[variant]} ${styles[btnType]} ${className}`;
 
     // Handle click and stop event propagation
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -40,6 +42,14 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         if (onClick) {
             onClick();
         }
+    };
+
+    // Render the icon based on whether it's a string or a React node
+    const renderIcon = () => {
+        if (typeof icon === 'string') {
+            return <Icon>{icon}</Icon>;
+        }
+        return icon;
     };
 
     if (isIconOnly) {
@@ -58,7 +68,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
                 }}
                 className={buttonClass}
             >
-                <Icon>{icon}</Icon>
+                {renderIcon()}
             </IconButton>
         );
     }
@@ -66,8 +76,8 @@ const CustomButton: React.FC<CustomButtonProps> = ({
     return (
         <Button
             variant={variant}
-            startIcon={icon && iconPosition === 'start' ? <Icon>{icon}</Icon> : undefined}
-            endIcon={icon && iconPosition === 'end' ? <Icon>{icon}</Icon> : undefined}
+            startIcon={icon && iconPosition === 'start' ? renderIcon() : undefined}
+            endIcon={icon && iconPosition === 'end' ? renderIcon() : undefined}
             onClick={handleClick}
             className={buttonClass}
             sx={{
@@ -77,6 +87,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
                 boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Shadow for all buttons
                 ...sx,
             }}
+            type={type == 'submit' ? 'submit' : 'button'}
         >
             {text}
         </Button>

@@ -50,13 +50,13 @@ const AlertBox: React.FC<IProps> = ({ headerLabel = '', subHeaderLabel = '', sub
                     <CustomButton
                         icon="call"
                         variant="contained"
-                        type='success'
+                        btnType='success'
                         sx={{ height: '28px', width: '28px' }}
                     />
                     <CustomButton
                         icon="close"
                         variant="contained"
-                        type='error'
+                        btnType='error'
                         sx={{ height: '28px', width: '28px' }}
                     />
                 </div>
@@ -83,10 +83,10 @@ const AlertBox: React.FC<IProps> = ({ headerLabel = '', subHeaderLabel = '', sub
     return (
         <section className="alert-box">
 
-            <header>
+            <header className='alert-box__header'>
                 <section className="main-and-subheader">
-                    <h4 className="main-header">{headerLabel}</h4>
-                    <h6 className='sub-header'>
+                    <h4 className="main-heading">{headerLabel}</h4>
+                    <h6 className='sub-heading'>
                         {
                             subHeaderIcon ? subHeaderIcon : <></>
                         }

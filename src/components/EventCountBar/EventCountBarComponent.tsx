@@ -1,9 +1,10 @@
 import Icon from '@mui/material/Icon';
 import './EventCountBarComponent.scss';
 import CustomButton from '../CustomButton/CustomButtonComponent';
+import SvgIcon from '../SvgIcons/SvgIconComponent';
 
 export interface IEventCounter {
-    icon: any;
+    icon: 'safetyInfractions' | 'ppeNoHardHat' | 'ppeNoSafetyVest' | 'ppeNoMask' | 'fallDetection' | 'proximityToRunningEquipment';
     count: number;
     name: string;
 }
@@ -20,10 +21,14 @@ const EventCountBar: React.FC<IProps> = ({ countList }) => {
                 countList.map((eventCount: IEventCounter, index: number) => (
                     <li key={index}>
 
-                        <CustomButton
+                        <figure>
+                            <SvgIcon name={eventCount.icon} height={36} width={36} />
+                        </figure>
+
+                        {/* <CustomButton
                             icon={eventCount.icon}
                             sx={{ width: '36px', height: '36px !important' }}
-                        />
+                        /> */}
                         {/* <Icon>{eventCount.icon}</Icon> */}
                         <header>
                             <h4>{eventCount.count}</h4>

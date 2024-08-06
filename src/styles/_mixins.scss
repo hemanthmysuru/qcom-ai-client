@@ -47,3 +47,17 @@
         color 0.3s,
         border-color 0.3s;
 }
+
+@mixin flex-row($justifyContent: center) {
+    display: flex;
+    flex-direction: row;
+    justify-content: $justifyContent;
+    align-items: center;
+}
+
+@mixin flex-column($alignItems: center) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: $alignItems;
+}

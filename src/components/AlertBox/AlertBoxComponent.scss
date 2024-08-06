@@ -7,20 +7,20 @@ $blockPadding: 8px;
     border-radius: 4px;
     background: var(--alertbox-bg-color);
 
-    > header {
+    &__header {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
         padding: $blockPadding;
         .main-and-subheader {
-            .main-header {
+            .main-heading {
                 margin: 0;
                 font-size: $font-size-base;
                 font-weight: 400;
                 color: var(--alertbox-header-color);
             }
-            .sub-header {
+            .sub-heading {
                 margin: 0;
                 display: flex;
                 flex-direction: row;

@@ -8,10 +8,11 @@
     align-items: center;
     column-gap: 24px;
     width: fit-content;
-    padding: 12px 16px;
+    padding: 8px 16px;
     border-radius: 8px;
     background-color: var(--eventcountbar-bg-color);
     margin: auto;
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.16);
 
     li {
         display: flex;
@@ -19,7 +20,7 @@
         align-content: center;
         justify-content: center;
         align-items: center;
-        column-gap: 4px;
+        column-gap: 8px;
 
         header {
             h4,
@@ -28,71 +29,88 @@
             }
 
             h4 {
-                font-size: $font-size-large;
-                font-weight: 700;
-                line-height: 21px;
+                font-size: $font-size-xlarge;
+                font-weight: 500;
+                line-height: 19px;
                 color: var(--eventcountbar-header-text-color);
             }
 
             h5 {
                 font-size: $font-size-xsmall;
-                font-weight: 600;
-                line-height: 16px;
+                font-weight: 500;
+                line-height: 14px;
                 color: var(--eventcountbar-subheader-text-color);
             }
         }
 
+        figure {
+            width: 36px;
+            min-width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
         &:nth-child(1) {
-            button {
+            figure {
                 background-color: $eventcountbar-index-1-icon-bg-color;
-                &:hover {
-                    background-color: darken($eventcountbar-index-1-icon-bg-color, 10);
-                }
+                // &:hover {
+                //     background-color: darken($eventcountbar-index-1-icon-bg-color, 10);
+                // }
             }
         }
 
         &:nth-child(2) {
-            button {
+            figure {
                 background-color: $eventcountbar-index-2-icon-bg-color;
-                &:hover {
-                    background-color: darken($eventcountbar-index-2-icon-bg-color, 10%);
-                }
+                // &:hover {
+                //     background-color: darken($eventcountbar-index-2-icon-bg-color, 10%);
+                // }
             }
         }
 
         &:nth-child(3) {
-            button {
+            figure {
                 background-color: $eventcountbar-index-3-icon-bg-color;
-                &:hover {
-                    background-color: darken($eventcountbar-index-3-icon-bg-color, 10%);
-                }
+                // &:hover {
+                //     background-color: darken($eventcountbar-index-3-icon-bg-color, 10%);
+                // }
             }
         }
 
         &:nth-child(4) {
-            button {
+            figure {
                 background-color: $eventcountbar-index-4-icon-bg-color;
-                &:hover {
-                    background-color: darken($eventcountbar-index-4-icon-bg-color, 10%);
-                }
+                // &:hover {
+                //     background-color: darken($eventcountbar-index-4-icon-bg-color, 10%);
+                // }
             }
         }
 
         &:nth-child(5) {
-            button {
+            figure {
                 background-color: $eventcountbar-index-5-icon-bg-color;
-                &:hover {
-                    background-color: darken($eventcountbar-index-5-icon-bg-color, 10%);
-                }
+                // &:hover {
+                //     background-color: darken($eventcountbar-index-5-icon-bg-color, 10%);
+                // }
             }
         }
 
         &:nth-child(6) {
-            button {
+            figure {
                 background-color: $eventcountbar-index-6-icon-bg-color;
-                &:hover {
-                    background-color: darken($eventcountbar-index-6-icon-bg-color, 10%);
-                }
+                // &:hover {
+                //     background-color: darken($eventcountbar-index-6-icon-bg-color, 10%);
+                // }
             }
         }
     }

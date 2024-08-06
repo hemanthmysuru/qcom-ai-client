@@ -15,7 +15,7 @@
 
     // Header Colors
     --header-bg-color: #0d1826;
-    --header-txt-color: #6fb5ce;
+    --header-txt-color: #9fb9db;
     --header-selected-nav-link-bg-color: #204b81;
     --header-selected-nav-link-txt-color: #ffffff;
 
@@ -58,6 +58,21 @@
     --alertbox-footer-time-color: var(--text-color-light-3x);
 
     --eventcountbar-bg-color: #eaf3ff;
-    --eventcountbar-header-text-color: var(--text-color);
-    --eventcountbar-subheader-text-color: var(--text-color);
+    --eventcountbar-border-color: #eaf3ff;
+    --eventcountbar-header-text-color: #30606b;
+    --eventcountbar-subheader-text-color: #1c3b62;
+
+    --footer-bg-color: #e9ecee;
+    --footer-txt-color: #3253dc;
+
+    --config-cam-list-bg-color: #f2f5f9;
+    --config-cam-list-item-bg-color: var(--white-color);
+    --config-cam-list-item-txt-color: var(--text-color);
+    --config-cam-list-item-icon-color: #a6a8a8;
+    --config-cam-list-hover-item-bg-color: var(--primary-color-light);
+    --config-cam-list-hover-item-txt-color: var(--text-color);
+    --config-cam-list-hover-item-icon-color: #a6a8a8;
+    --config-cam-list-selected-item-bg-color: #97aaed;
+    --config-cam-list-selected-item-txt-color: var(--white-color);
+    --config-cam-list-selected-item-icon-color: var(--white-color);
 }

@@ -1,1 +1,112 @@
 @import "../../styles/variables";
+
+$start-color: #0e1b4f;
+$end-color: #3253dc;
+$headerBg: #0d1826;
+$inputBorderColor: #93a8c1;
+$formWidth: 408px;
+$inputHeight: 42px;
+
+.login-page {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to right, $start-color, $end-color);
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    form {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        width: $formWidth;
+
+        > header {
+            background-color: $headerBg;
+            padding: 16px 24px;
+
+            figure {
+                height: 32px;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+
+                img {
+                    height: 100%;
+                    display: block;
+                }
+            }
+        }
+
+        .content {
+            padding: 16px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            row-gap: 24px;
+
+            .input-and-label {
+                display: flex;
+                flex-direction: column;
+                row-gap: 4px;
+                width: 100%;
+
+                label {
+                    font-size: $font-size-small;
+                    font-weight: 500;
+                }
+
+                .input-box {
+                    width: 100%;
+                    height: $inputHeight;
+                    border-radius: 24px;
+                    border: 1px solid $inputBorderColor;
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: row;
+                    align-content: center;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    input {
+                        padding: 0;
+                        margin: 0;
+                        border: none;
+                        padding: 0 0 0 16px;
+                        font-size: $font-size-base;
+                        width: calc(100% - $inputHeight);
+                        height: 100%;
+                        background: transparent;
+
+                        &:-webkit-autofill {
+                            background-color: white !important;
+                            -webkit-box-shadow: 0 0 0px 1000px white inset;
+                            box-shadow: 0 0 0px 1000px white inset;
+                            -webkit-text-fill-color: black !important; /* Optional: Ensures text color remains black */
+                        }
+                    }
+
+                    .icon {
+                        padding: 13px;
+                        width: $inputHeight;
+                        height: $inputHeight;
+                        display: flex;
+                        flex-direction: row;
+                        align-content: center;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+            }
+
+            .submit-btn {
+                width: 100%;
+                height: $inputHeight;
+                margin: 8px 0 16px;
+            }
+        }
+    }
+}

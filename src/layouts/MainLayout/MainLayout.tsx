@@ -94,7 +94,7 @@ const MainLayout: React.FC<MainLayoutProps> = (props) => {
                     sx={{
                         top: 'unset',
                         display: { xs: 'none', sm: 'block' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, top: 'unset', height: 'calc(100% - 68px)' },
+                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, top: 'unset', height: 'calc(100% - (64px + 24px))' },
                     }}
                     open
                 >

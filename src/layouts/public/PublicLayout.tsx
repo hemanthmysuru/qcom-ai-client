@@ -5,12 +5,11 @@ import { Outlet } from 'react-router-dom';
 const PublicLayout: React.FC = () => {
     return (
         <section className="layout protected">
-            <header>
+            {/* <header>
                 <nav>
                     <h1>Public Header</h1>
-                    {/* Add public navigation links here */}
                 </nav>
-            </header>
+            </header> */}
             <main>
                 <Outlet />
             </main>

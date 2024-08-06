@@ -6,7 +6,6 @@ interface IPublicRouteProps {
 }
 
 const PublicRoute: React.FC<IPublicRouteProps> = ({ isAuthenticated, redirectTo = '/' }) => {
-    console.log('isAuthenticated:: ', isAuthenticated);
     return !isAuthenticated ? <Outlet /> : <Navigate to={redirectTo} />;
 }
 

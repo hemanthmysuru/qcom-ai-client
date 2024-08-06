@@ -1,0 +1,84 @@
+@import "../../styles/main.scss";
+@import "../../styles/mixins";
+
+.camera-list-container {
+    padding: 8px;
+    background-color: var(--config-cam-list-bg-color);
+    .list-header {
+    }
+
+    .list {
+        @include flex-column(flex-start);
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        width: 100%;
+        row-gap: 8px;
+        .item {
+            width: 100%;
+            height: 48px;
+            padding: 16px;
+            @include flex-row(space-between);
+            background-color: var(--config-cam-list-item-bg-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+
+            label {
+                cursor: pointer;
+                font-size: $font-size-base;
+                // font-weight: 500;
+                color: var(--config-cam-list-item-txt-color);
+            }
+
+            button {
+                width: 32px;
+                height: 32px;
+                border: none !important;
+                box-shadow: none;
+                transition: all 0.3s ease-in-out;
+                // color: var(--config-cam-list-item-icon-color);
+                svg path {
+                    transition: all 0.3s ease-in-out;
+                }
+            }
+
+            &:hover {
+                background-color: var(--config-cam-list-hover-item-bg-color);
+
+                label {
+                    color: var(--config-cam-list-hover-item-txt-color);
+                }
+
+                button {
+                    // background-color: var(--config-cam-list-selected-item-bg-color) !important;
+                    &:hover {
+                        background-color: white;
+                    }
+                }
+            }
+
+            &.selected {
+                background-color: var(--config-cam-list-selected-item-bg-color);
+
+                label {
+                    color: var(--config-cam-list-selected-item-txt-color);
+                }
+
+                button {
+                    svg path {
+                        fill: var(--config-cam-list-selected-item-icon-color);
+                        stroke: var(--config-cam-list-selected-item-icon-color);
+                    }
+
+                    &:hover {
+                        svg path {
+                            fill: var(--config-cam-list-selected-item-bg-color);
+                            stroke: var(--config-cam-list-selected-item-bg-color);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

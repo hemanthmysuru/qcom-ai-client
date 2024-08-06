@@ -7,6 +7,9 @@ import { useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 // import Breadcrumb from './Breadcrumb';
 import './Header.scss';
+import SvgIcon from '../SvgIcons/SvgIconComponent';
+import { NavLink, useLocation } from 'react-router-dom';
+import RippleEffect from '../RippleEffect/RippleEffect';
 
 const useMenu = () => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -33,6 +36,7 @@ const Header: React.FC = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const location = useLocation();
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
         if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
@@ -67,27 +71,83 @@ const Header: React.FC = () => {
         )
     }
 
+    const silhouetteRenderer = () => {
+        return (
+            <>
+                <RippleEffect as="section" className="ripple-box user-info">
+                    <div className="silhouette-and-info">
+                        <figure className="silhouette">PB</figure>
+                        <article className="info">
+                            <label>Peter Bishop</label>
+                            <span>Ops Manager</span>
+                        </article>
+                    </div>
+                    <figure className="action-arrow">
+                        <SvgIcon name="arrowDown" height={24} />
+                    </figure>
+                </RippleEffect>
+                {/* <section className="user-info" onClick={handleMenu}>
+                    <div className="silhouette-and-info">
+                        <figure className="silhouette">PB</figure>
+                        <article className="info">
+                            <label>Peter Bishop</label>
+                            <span>Ops Manager</span>
+                        </article>
+                    </div>
+                    <figure className="action-arrow">
+                        <SvgIcon name="arrowDown" height={24} />
+                    </figure>
+                </section> */}
+                <Menu
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                >
+                    <MenuItem>Peter Bishop</MenuItem>
+                    <MenuItem>Ops Manager</MenuItem>
+                </Menu>
+            </>
+        )
+    }
+
     const navListRenderer = () => {
         return (
             <section className="navbar-and-silhouette">
                 <nav>
-                    <a href="#">
-                        <Notifications />
-                        <label>alert</label>
-                    </a>
-                    <a href="#">
-                        <BarChart />
-                        <label>Analytics</label>
-                    </a>
-                    <a href="#">
-                        <Settings />
-                        <label>Configurations</label>
-                    </a>
+                    <RippleEffect as="section" className="ripple-box user-info">
+                        <NavLink to="/alerts" className={({ isActive }) => (isActive ? 'selected' : '')}>
+                            <SvgIcon name="bell" height={14} />
+                            <label>alerts</label>
+                        </NavLink>
+                    </RippleEffect>
+                    <RippleEffect as="section" className="ripple-box user-info">
+                        <NavLink to="/analytics" className={({ isActive }) => (isActive ? 'selected' : '')}>
+                            <SvgIcon name="analytics" height={14} />
+                            <label>Analytics</label>
+                        </NavLink>
+                    </RippleEffect>
+                    <RippleEffect as="section" className="ripple-box user-info">
+                        <NavLink to="/configurations" className={({ isActive }) => (isActive ? 'selected' : '')}>
+                            <SvgIcon name="config" height={14} />
+                            <label>Configurations</label>
+                        </NavLink>
+                    </RippleEffect>
                 </nav>
-                <figure className="silhouette">
-                    <IconButton onClick={handleMenu} sx={{ ml: 2 }}>
-                        <Avatar>U</Avatar>
-                    </IconButton>
+                {silhouetteRenderer()}
+                {/* <figure className="silhouette">
+                    <Box>
+                        <IconButton onClick={handleMenu} sx={{ ml: 2 }}>
+                            <Avatar>U</Avatar>
+                        </IconButton>
+                    </Box>
                     <Menu
                         anchorEl={anchorEl}
                         open={open}
@@ -104,7 +164,7 @@ const Header: React.FC = () => {
                         <MenuItem disabled>Username</MenuItem>
                         <MenuItem>Designation</MenuItem>
                     </Menu>
-                </figure>
+                </figure> */}
             </section>
         )
     }
@@ -159,8 +219,9 @@ const Header: React.FC = () => {
             // </Box>
 
             <figure className='logo-and-app-name'>
-                <img src="" alt="logo" />
-                <figcaption>Qualcomm AI Ops</figcaption>
+                {/* <img src={logo} alt="logo" /> */}
+                <SvgIcon name="logoAndName" height={32} width={222} />
+                {/* <figcaption>Qualcomm AI Ops</figcaption> */}
             </figure>
         )
     }

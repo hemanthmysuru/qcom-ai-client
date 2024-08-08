@@ -10,6 +10,8 @@ import { Divider } from "@mui/material";
 import './UiElementsPage.scss';
 import RippleEffect from "../../components/RippleEffect/RippleEffect";
 import Quadrilateral from "../../components/Quadrilateral/QuadrilateralComponent";
+import floorHotspotImage from '../../assets/images/floor-hotspot1.png';
+import floorHotspotVideo from '../../assets/videos/floor-hotspot1.mp4';
 
 const eventCounterList: IEventCounter[] = [
     { count: 54, icon: 'safetyInfractions', name: 'Safety Infraction' },
@@ -31,6 +33,24 @@ const expandableitems = [
 const UiElementsPage: React.FC = () => {
 
     const [open, setOpen] = useState<boolean>(false);
+    const [coordinates, setCoordinates] = useState<any>([
+        {
+            "x": 8,
+            "y": 101.40277862548828
+        },
+        {
+            "x": 481,
+            "y": 293.4027786254883
+        },
+        {
+            "x": 525,
+            "y": 498.4027786254883
+        },
+        {
+            "x": 340,
+            "y": 476.4027786254883
+        }
+    ]);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -51,12 +71,29 @@ const UiElementsPage: React.FC = () => {
     return (
         <section className="ui-elements-page">
 
-            <header>Quadrilateral</header>
+            <header>Quadrilateral video</header>
             <section className="content">
-                <Quadrilateral onCoordinatesChange={handleCoordinatesChange} />
+                <Quadrilateral
+                    mediaType="video"
+                    pointsVisible={false}
+                    mediaSrc={floorHotspotVideo}
+                    defaultCoordinates={coordinates}
+                    onCoordinatesChange={handleCoordinatesChange} />
             </section>
 
             <Divider />
+
+            <header>Quadrilateral image</header>
+            <section className="content">
+                <Quadrilateral
+                    mediaType="image"
+                    pointsVisible={true}
+                    mediaSrc={floorHotspotImage}
+                    onCoordinatesChange={handleCoordinatesChange} />
+            </section>
+
+            <Divider />
+
             <header>Buttons</header>
             <section className="content">
                 <CustomButton

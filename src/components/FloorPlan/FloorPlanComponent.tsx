@@ -151,7 +151,7 @@ const FloorPlan: React.FC<IfloorPlan> = ({ showZoomAction, showFullScreenAction 
                         transition: dragging ? 'none' : 'transform 0.3s ease'
                     }}
                 />
-                <CameraView cameraAngle={45} fieldOfView={180} />
+                <CameraView cameraAngle={295} fieldOfView={180} />
             </div>
 
             <aside className="actions">

@@ -6,6 +6,8 @@ import './AlertsPage.scss';
 import EventCountBar, { IEventCounter } from '../../components/EventCountBar/EventCountBarComponent';
 import CustomDialog from '../../components/CustomDialog/CustomDialogComponent';
 import useCustomDialogHandler from '../../components/CustomDialog/useCustomDialogHandler';
+import FloorPlan from '../../components/FloorPlan/FloorPlanComponent';
+
 
 const Expandableitems = [
     { id: 1, title: 'Item 1', content: <Notifications /> },
@@ -50,6 +52,7 @@ const AlertsPage: React.FC = () => {
         </section>
     );
 
+
     const mainContent = (
         <div>
             <EventCountBar countList={eventCounterList} />
@@ -64,6 +67,10 @@ const AlertsPage: React.FC = () => {
                 onCancel={handleCancelDialog}
                 onSave={handleSaveDialog}
             />
+
+            <br />
+
+            <FloorPlan showZoomAction={true} showFullScreenAction={true} />
         </div>
     );
 

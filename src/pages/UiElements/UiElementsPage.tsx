@@ -9,6 +9,7 @@ import ExpandableAlertList from "../../components/ExpandableAlertList/Expandable
 import { Divider } from "@mui/material";
 import './UiElementsPage.scss';
 import RippleEffect from "../../components/RippleEffect/RippleEffect";
+import Quadrilateral from "../../components/Quadrilateral/QuadrilateralComponent";
 
 const eventCounterList: IEventCounter[] = [
     { count: 54, icon: 'safetyInfractions', name: 'Safety Infraction' },
@@ -42,8 +43,19 @@ const UiElementsPage: React.FC = () => {
         handleClose();
     };
 
+    const handleCoordinatesChange = (points: { x: number; y: number }[]) => {
+        console.log('Updated Coordinates:', points);
+        // You can perform further actions with the updated coordinates here
+    };
+
     return (
         <section className="ui-elements-page">
+
+            <header>Quadrilateral</header>
+            <section className="content">
+                <Quadrilateral onCoordinatesChange={handleCoordinatesChange} />
+            </section>
+
             <Divider />
             <header>Buttons</header>
             <section className="content">
@@ -181,6 +193,8 @@ const UiElementsPage: React.FC = () => {
                 </div>
             </section>
 
+            <Divider />
+
             <header>Ripple</header>
             <section className="content">
                 <RippleEffect as="button" className="ripple-button">Button</RippleEffect>
@@ -191,6 +205,8 @@ const UiElementsPage: React.FC = () => {
                     <figcaption>Figure</figcaption>
                 </RippleEffect>
             </section>
+
+
         </section>
     );
 }

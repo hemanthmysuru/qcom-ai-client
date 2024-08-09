@@ -61,3 +61,93 @@
     justify-content: center;
     align-items: $alignItems;
 }
+
+@mixin custom-scrollbar($width: 2px, $thumb-color: #999, $track-color: #f1f1f1) {
+    // scrollbar-width: thin; /* For Firefox */
+    // scrollbar-color: $thumb-color $track-color; /* For Firefox */
+
+    /* For Webkit browsers (Chrome, Safari) */
+    &::-webkit-scrollbar {
+        width: $width;
+        height: $width; /* For horizontal scrollbar */
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $thumb-color;
+        border-radius: 10px; /* Makes the thumb round */
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: $track-color;
+    }
+}
+
+@mixin thin-scrollbar($thumb-color, $track-color, $thumb-hover-color: $thumb-color) {
+    // WebKit-based browsers (Chrome, Safari, Edge)
+    $size: 6px;
+    $radius: 0px;
+
+    // padding-right: $size + 4px;
+    &::-webkit-scrollbar {
+        width: $size;
+        height: $size; // Handle horizontal scrollbar if necessary
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $track-color;
+        border-radius: $radius; // Rounded corners for the track
+        margin-left: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $thumb-color;
+        border-radius: $radius; // Rounded corners for the thumb
+        // width: $thumb-size;
+        // min-width: $thumb-size;
+        // height: $thumb-size;
+        // min-height: $thumb-size;
+        width: $size;
+        height: $size;
+        border-left: 2px solid $track-color;
+        margin: auto; // Center the thumb within the track
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: $thumb-hover-color;
+    }
+
+    // Firefox
+    // scrollbar-width: thin;
+    // scrollbar-color: $thumb-color $track-color;
+
+    // Microsoft Edge (non-WebKit)
+    &::-ms-scrollbar {
+        width: $size;
+        height: $size;
+    }
+
+    &::-ms-scrollbar-track {
+        background: $track-color;
+        border-radius: $radius; // Rounded corners for the track
+    }
+
+    &::-ms-scrollbar-thumb {
+        background-color: $thumb-color;
+        border-radius: $radius; // Rounded corners for the thumb
+        // width: $thumb-size;
+        // height: $thumb-size;
+        width: $size;
+        height: $size;
+        border: 2px solid $track-color;
+    }
+
+    &::-ms-scrollbar-thumb:hover {
+        background-color: $thumb-hover-color;
+    }
+
+    // // General scrollbar for Edge
+    // & {
+    //     scrollbar-width: thin;
+    //     scrollbar-color: $thumb-color $track-color;
+    // }
+}

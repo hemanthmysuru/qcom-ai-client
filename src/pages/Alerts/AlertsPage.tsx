@@ -58,6 +58,7 @@ const AlertsPage: React.FC = () => {
             <EventCountBar countList={eventCounterList} />
 
             <CustomDialog
+                headerLabel='Header label'
                 open={openDialog}
                 content={dialogContent}
                 dialogMaxWidth='md'

@@ -35,9 +35,12 @@
     --white-color: #ffffff;
     --black-color: #000000;
 
-    --dialogbox-bg-color: var(--white-color);
-    --dialogbox-outline-btn-hover-bg: #e0e5fa;
-    --dialogbox-txt-color: var(--text-color);
+    --dialogbox-bg-color: #0d0d0d; // var(--white-color)
+    --dialogbox-header-bg-color: rgba(15, 15, 15, 0.8);
+    --dialogbox-divider-color: #141414;
+    --dialogbox-outline-btn-hover-bg: #201f1f; // #e0e5fa
+    --dialogbox-txt-color: var(--white-color); // var(--text-color);
+    --dialogbox-content-bg-color: #222222; // var(--text-color);
 
     // dark
     // --alertbox-bg-color: rgba(0, 0, 0, 0.8);
@@ -75,4 +78,8 @@
     --config-cam-list-selected-item-bg-color: #97aaed;
     --config-cam-list-selected-item-txt-color: var(--white-color);
     --config-cam-list-selected-item-icon-color: var(--white-color);
+
+    --scrollbar-thumb-color: #68b5c7;
+    --scrollbar-thumb-hover-color: #4aa1b4;
+    --scrollbar-track-color: #f2f5f9;
 }

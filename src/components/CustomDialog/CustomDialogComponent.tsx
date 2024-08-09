@@ -8,9 +8,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import CustomButton from '../CustomButton/CustomButtonComponent';
 import styles from './CustomDialog.module.scss';
 import { Divider } from '@mui/material';
+import SvgIcon from '../SvgIcons/SvgIconComponent';
 
 // Define the props interface for the dialog component
-interface CustomDialogProps {
+export interface ICustomDialogProps {
+    headerLabel: string;
     open: boolean;
     content: React.ReactNode;
     cancelText?: string;
@@ -21,7 +23,8 @@ interface CustomDialogProps {
     onSave: () => void;
 }
 
-const CustomDialog: React.FC<CustomDialogProps> = ({
+const CustomDialog: React.FC<ICustomDialogProps> = ({
+    headerLabel,
     open,
     onClose,
     content,
@@ -42,12 +45,13 @@ const CustomDialog: React.FC<CustomDialogProps> = ({
             }}
         >
             <DialogTitle className={styles.dialogTitle}>
-                <span>Header Label</span>
+                <span>{headerLabel}</span>
                 <IconButton edge="end" color="inherit" onClick={onClose} aria-label="close">
-                    <CloseIcon />
+                    {/* <CloseIcon /> */}
+                    <SvgIcon name='close' />
                 </IconButton>
             </DialogTitle>
-            <Divider className={styles.divider} />
+            {/* <Divider className={styles.divider} /> */}
             <DialogContent className={styles.dialogContent}>
                 {content}
             </DialogContent>
@@ -59,8 +63,12 @@ const CustomDialog: React.FC<CustomDialogProps> = ({
                     className={styles.dialogOutlinedButton}
                     onClick={onCancel}
                     sx={{
+                        border: '1px solid #878787 !important',
+                        color: '#878787 !important',
                         '&:hover': {
                             backgroundColor: 'var(--dialogbox-outline-btn-hover-bg) !important', // Override hover state
+                            border: '1px solid #b4b4b4 !important',
+                            color: '#b4b4b4 !important',
                         }
                     }}
                 />

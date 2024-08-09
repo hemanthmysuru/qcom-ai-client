@@ -18,6 +18,9 @@ $dialogbox-bg-color: var(--dialogbox-bg-color);
     align-items: center;
     color: var(--dialogbox-txt-color); /* Use variable for text color */
     padding: 8px 24px !important;
+    font-size: $font-size-large !important;
+    font-weight: 500;
+    background-color: var(--dialogbox-header-bg-color);
 
     button {
         background: transparent !important;
@@ -37,6 +40,7 @@ $dialogbox-bg-color: var(--dialogbox-bg-color);
 
 .dialogContent {
     padding: 0 !important;
+    height: 100%;
 }
 
 .dialogActions {
@@ -45,6 +49,8 @@ $dialogbox-bg-color: var(--dialogbox-bg-color);
     padding: 16px 24px !important; /* Adjust padding as needed */
 
     button {
+        font-size: $font-size-base;
+        font-weight: 400;
         &.CustomButton_outlined {
             &:hover {
                 background-color: var(--dialogbox-outline-btn-hover-bg) !important;
@@ -63,7 +69,7 @@ $dialogbox-bg-color: var(--dialogbox-bg-color);
 }
 
 .divider {
-    border-color: var(--divider-border-color);
+    border-color: var(--dialogbox-divider-color) !important;
 }
 
 .outlinedButton {

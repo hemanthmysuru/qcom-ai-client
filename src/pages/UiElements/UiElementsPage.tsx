@@ -12,6 +12,7 @@ import RippleEffect from "../../components/RippleEffect/RippleEffect";
 import Quadrilateral from "../../components/Quadrilateral/QuadrilateralComponent";
 import floorHotspotImage from '../../assets/images/floor-hotspot1.png';
 import floorHotspotVideo from '../../assets/videos/floor-hotspot1.mp4';
+import useCustomDialogHandler from "../../components/CustomDialog/useCustomDialogHandler";
 
 const eventCounterList: IEventCounter[] = [
     { count: 54, icon: 'safetyInfractions', name: 'Safety Infraction' },
@@ -51,17 +52,11 @@ const UiElementsPage: React.FC = () => {
             "y": 476.4027786254883
         }
     ]);
+    const { openDialog, handleOpenDialog, handleCloseDialog, handleCancelDialog, handleSaveDialog } = useCustomDialogHandler();
 
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-    const handleCancel = () => {
-        console.log('Cancelled');
-        handleClose();
-    };
-    const handleSave = () => {
-        console.log('Saved');
-        handleClose();
-    };
+    const handleOpen = () => {
+        handleOpenDialog();
+    }
 
     const handleCoordinatesChange = (points: { x: number; y: number }[]) => {
         console.log('Updated Coordinates:', points);
@@ -169,13 +164,15 @@ const UiElementsPage: React.FC = () => {
                 />
 
                 <CustomDialog
-                    open={open}
-                    onClose={handleClose}
+                    headerLabel='Header label'
+                    open={openDialog}
                     content={<div>Dynamic Content Goes Here</div>}
-                    onCancel={handleCancel}
-                    onSave={handleSave}
+                    dialogMaxWidth='md'
                     cancelText="Cancel"
                     saveText="Save"
+                    onClose={handleCloseDialog}
+                    onCancel={handleCancelDialog}
+                    onSave={handleSaveDialog}
                 />
             </section>
 

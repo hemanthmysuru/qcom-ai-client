@@ -1,84 +1,152 @@
 @import "../../styles/main.scss";
 @import "../../styles/mixins";
 
+$headerHeight: 60px;
+
 .camera-list-container {
     padding: 8px;
     background-color: var(--config-cam-list-bg-color);
+    height: 100%;
+    @include flex-column();
+    row-gap: 8px;
+
     .list-header {
+        height: $headerHeight;
+        width: 100%;
+        @include flex-row(space-between);
+        border-bottom: 1px solid rgba(134, 147, 168, 1);
+        margin: 16px 0;
+
+        > div {
+            background-color: var(--primary-color);
+            height: 46px;
+            width: 121px;
+            text-align: center;
+            @include flex-column();
+            height: 100%;
+            line-height: 21px;
+
+            h4 {
+                font-size: $font-size-base;
+                font-weight: 500;
+                color: var(--white-color);
+            }
+        }
+
+        .actions {
+            @include flex-row();
+            column-gap: 16px;
+            button {
+                // width: 32px;
+                // height: 32px;
+                background-color: #68b5c7;
+            }
+        }
     }
 
-    .list {
-        @include flex-column(flex-start);
-        padding: 0;
-        margin: 0;
-        list-style: none;
+    .list-content {
         width: 100%;
-        row-gap: 8px;
-        .item {
+        height: calc(100% - $headerHeight);
+        overflow: hidden;
+        overflow-y: auto;
+        // padding: 8px;
+        // margin: 8px;
+        @include thin-scrollbar(
+            var(--scrollbar-thumb-color),
+            var(--scrollbar-track-color),
+            var(--scrollbar-thumb-hover-color)
+        );
+        // @include custom-scrollbar();
+        .list {
+            @include flex-column(flex-start);
+            padding: 0;
+            margin: 0;
+            list-style: none;
             width: 100%;
-            height: 48px;
-            padding: 16px;
-            @include flex-row(space-between);
-            background-color: var(--config-cam-list-item-bg-color);
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-
-            label {
+            row-gap: 8px;
+            .item {
+                width: 100%;
+                height: 48px;
+                padding: 16px;
+                @include flex-row(space-between);
+                background-color: var(--config-cam-list-item-bg-color);
+                border-radius: 4px;
                 cursor: pointer;
-                font-size: $font-size-base;
-                // font-weight: 500;
-                color: var(--config-cam-list-item-txt-color);
-            }
-
-            button {
-                width: 32px;
-                height: 32px;
-                border: none !important;
-                box-shadow: none;
                 transition: all 0.3s ease-in-out;
-                // color: var(--config-cam-list-item-icon-color);
-                svg path {
+
+                label {
+                    cursor: pointer;
+                    font-size: $font-size-base;
+                    // font-weight: 500;
+                    color: var(--config-cam-list-item-txt-color);
+                }
+
+                button {
+                    width: 32px;
+                    height: 32px;
+                    border: none !important;
+                    box-shadow: none;
                     transition: all 0.3s ease-in-out;
-                }
-            }
-
-            &:hover {
-                background-color: var(--config-cam-list-hover-item-bg-color);
-
-                label {
-                    color: var(--config-cam-list-hover-item-txt-color);
-                }
-
-                button {
-                    // background-color: var(--config-cam-list-selected-item-bg-color) !important;
-                    &:hover {
-                        background-color: white;
-                    }
-                }
-            }
-
-            &.selected {
-                background-color: var(--config-cam-list-selected-item-bg-color);
-
-                label {
-                    color: var(--config-cam-list-selected-item-txt-color);
-                }
-
-                button {
+                    // color: var(--config-cam-list-item-icon-color);
                     svg path {
-                        fill: var(--config-cam-list-selected-item-icon-color);
-                        stroke: var(--config-cam-list-selected-item-icon-color);
+                        transition: all 0.3s ease-in-out;
+                    }
+                }
+
+                &:hover {
+                    background-color: var(--config-cam-list-hover-item-bg-color);
+
+                    label {
+                        color: var(--config-cam-list-hover-item-txt-color);
                     }
 
-                    &:hover {
+                    button {
+                        // background-color: var(--config-cam-list-selected-item-bg-color) !important;
+                        &:hover {
+                            background-color: white;
+                        }
+                    }
+                }
+
+                &.selected {
+                    background-color: var(--config-cam-list-selected-item-bg-color);
+
+                    label {
+                        color: var(--config-cam-list-selected-item-txt-color);
+                    }
+
+                    button {
                         svg path {
-                            fill: var(--config-cam-list-selected-item-bg-color);
-                            stroke: var(--config-cam-list-selected-item-bg-color);
+                            fill: var(--config-cam-list-selected-item-icon-color);
+                            stroke: var(--config-cam-list-selected-item-icon-color);
+                        }
+
+                        &:hover {
+                            svg path {
+                                fill: var(--config-cam-list-selected-item-bg-color);
+                                stroke: var(--config-cam-list-selected-item-bg-color);
+                            }
                         }
                     }
                 }
             }
         }
+    }
+}
+
+.delete-cam-dialog-content {
+    padding: $padding;
+    header,
+    p {
+        font-size: $font-size-base;
+        color: var(--dialogbox-txt-color);
+    }
+    > header {
+        font-weight: 500;
+        margin-bottom: 16px;
+    }
+
+    > p {
+        font-weight: 100;
     }
 }

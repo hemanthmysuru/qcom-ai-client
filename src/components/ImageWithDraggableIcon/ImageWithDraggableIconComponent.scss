@@ -1,0 +1,15 @@
+.image-with-draggable-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.background-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.draggable-icon {
+    position: absolute;
+    cursor: pointer;
+}

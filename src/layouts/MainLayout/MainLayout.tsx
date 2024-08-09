@@ -35,16 +35,16 @@ const MainLayout: React.FC<MainLayoutProps> = (props) => {
     };
 
     const drawer = (
-        <div>
+        <>
             {listContent}
-        </div>
+        </>
     );
 
     // Remove this const when copying and pasting into your project.
     const container = window !== undefined ? window().document.body : undefined;
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', height: '100%' }}>
             <CssBaseline />
 
             <IconButton
@@ -94,7 +94,7 @@ const MainLayout: React.FC<MainLayoutProps> = (props) => {
                     sx={{
                         top: 'unset',
                         display: { xs: 'none', sm: 'block' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, top: 'unset', height: 'calc(100% - (64px + 24px))' },
+                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, top: 'unset', height: 'calc(100% - (64px + 24px))', overflow: 'initial' },
                     }}
                     open
                 >

@@ -1,5 +1,6 @@
 import CameraList from "../../components/CameraList/CameraListComponent";
 import MainLayout from "../../layouts/MainLayout/MainLayout";
+import './ConfigurationsPage.scss'
 
 const ConfigurationsPage: React.FC = () => {
 

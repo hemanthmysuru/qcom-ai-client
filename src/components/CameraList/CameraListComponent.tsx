@@ -6,7 +6,7 @@ import floorPlan from '../../assets/images/floor-plan.png';
 import CustomDialog from '../CustomDialog/CustomDialogComponent';
 import useCustomDialogHandler from '../CustomDialog/useCustomDialogHandler';
 import { useState } from 'react';
-import AddCameraDetails from '../AddCameraDetails/AddCameraDetailsComponent';
+import AddCameraDetails, { FormFieldsType } from '../AddCameraDetails/AddCameraDetailsComponent';
 
 interface ICameraDetails {
     id: number;
@@ -95,8 +95,12 @@ const CameraList: React.FC = () => {
         </section>
     );
 
+    const handleAddCameraDetailsFormChange = (data: FormFieldsType) => {
+        console.log('handleAddCameraDetailsFormChange::', data);
+    }
+
     const addCameraDialogContent: JSX.Element = (
-        <AddCameraDetails />
+        <AddCameraDetails onFormChange={handleAddCameraDetailsFormChange} />
     );
 
 

@@ -5,9 +5,10 @@ import './CameraViewComponent.scss';
 interface ICameraView {
     cameraAngle: number;
     fieldOfView: number;
+    showPin?: boolean;
 }
 
-const CameraView: React.FC<ICameraView> = ({ cameraAngle, fieldOfView }) => {
+const CameraView: React.FC<ICameraView> = ({ cameraAngle, fieldOfView, showPin = true }) => {
     // Ensure cameraAngle and fieldOfView are within the 0 to 359 range
     const validatedCameraAngle = Math.max(0, Math.min(cameraAngle, 360));
     const validatedFieldOfView = Math.max(0, Math.min(fieldOfView, 360));
@@ -23,7 +24,8 @@ const CameraView: React.FC<ICameraView> = ({ cameraAngle, fieldOfView }) => {
                     />
                 </figure>
             </aside>
-            <Pin text='10' />
+            {(showPin && (<Pin text='10' />))}
+            {/* <Pin text='10' /> */}
             {/* <div>
                 <p>Camera Angle: {validatedCameraAngle}°</p>
                 <p>Field of View: {validatedFieldOfView}°</p>

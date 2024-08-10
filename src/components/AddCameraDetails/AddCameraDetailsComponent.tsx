@@ -1,64 +1,109 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './AddCameraDetailsComponent.scss';
 import floorPlan from '../../assets/images/floor-plan.png';
 import ImageWithDraggableIcon from '../ImageWithDraggableIcon/ImageWithDraggableIconComponent';
+import { debounce } from '../../utils/debounce';
 
-type FormFields = {
+export type FormFieldsType = {
     cameraId: string;
     cameraName: string;
     rtspUrl: string;
     cameraLocation: string;
     xCoordinate: string;
     yCoordinate: string;
-    cameraAngle: string;
-    cameraFov: string;
+    cameraAngle: number;
+    cameraFov: number;
 };
 
-const AddCameraDetails: React.FC = () => {
-    const [formData, setFormData] = useState<FormFields>({
+interface IAddCameraDetails {
+    onFormChange: (data: FormFieldsType) => void;
+}
+
+const AddCameraDetails: React.FC<IAddCameraDetails> = ({ onFormChange }) => {
+    const [formData, setFormData] = useState<FormFieldsType>({
         cameraId: '',
         cameraName: '',
         rtspUrl: '',
         cameraLocation: '',
         xCoordinate: '',
         yCoordinate: '',
-        cameraAngle: '',
-        cameraFov: '',
+        cameraAngle: 0,
+        cameraFov: 0,
     });
 
+    // Debounced function for handling form change
+    const debouncedOnFormChange = useCallback(
+        debounce((data: FormFieldsType) => {
+            try {
+                onFormChange(data);
+            } catch (error) {
+                console.error('Error updating form:', error);
+            }
+        }, 500),
+        [onFormChange]
+    );
+
+    // Handle changes in form fields
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData(prevState => {
-            const updatedFormData = { ...prevState, [name]: value };
-            console.log(updatedFormData); // Print the updated form data to console
+            const updatedValue = name === 'cameraAngle' || name === 'cameraFov'
+                ? Math.max(0, Math.min(parseInt(value, 10), 360))
+                : value;
+            const updatedFormData = { ...prevState, [name]: updatedValue };
+
+            debouncedOnFormChange(updatedFormData);
             return updatedFormData;
         });
     };
 
+    // Handle changes in icon position
+    const handleIconPositionChange = (position: { x: number, y: number }) => {
+        setFormData(prevState => {
+            const updatedFormData = {
+                ...prevState,
+                xCoordinate: position.x.toFixed(2),
+                yCoordinate: position.y.toFixed(2),
+            };
+            debouncedOnFormChange(updatedFormData);
+            return updatedFormData;
+        });
+    };
+
+    // Render a single input block
     const inputBlockRenderer = (
         labelTxt: string,
         inputType: 'text' | 'number',
         isMandatory: boolean,
         placeHolderTxt: string,
         isDisabled: boolean,
-        name: keyof FormFields
-    ) => {
-        return (
-            <div className="input-block">
-                <label htmlFor={name}>
-                    {labelTxt}{isMandatory && (<mark>*</mark>)}
-                </label>
-                <input
-                    type={inputType}
-                    placeholder={placeHolderTxt}
-                    disabled={isDisabled}
-                    name={name}
-                    value={formData[name]}
-                    onChange={handleChange}
-                />
-            </div>
-        );
-    };
+        name: keyof FormFieldsType,
+        min?: number,
+        max?: number
+    ) => (
+        <div className="input-block">
+            <label htmlFor={name}>
+                {labelTxt}{isMandatory && <mark>*</mark>}
+            </label>
+            <input
+                type={inputType}
+                placeholder={placeHolderTxt}
+                disabled={isDisabled}
+                name={name}
+                value={formData[name]}
+                onChange={handleChange}
+                min={min}
+                max={max}
+            />
+        </div>
+    );
+
+    // Effect to clean up any remaining debounced calls when the component unmounts
+    useEffect(() => {
+        return () => {
+            debouncedOnFormChange.cancel();
+        };
+    }, [debouncedOnFormChange]);
 
     return (
         <section className="add-camera-details">
@@ -82,26 +127,26 @@ const AddCameraDetails: React.FC = () => {
                         <p>*Click on the map for entering camera location</p>
                         <div className="row">
                             <section className="column">
-                                {inputBlockRenderer('Camera Angle', 'number', true, 'Enter angle', false, 'cameraAngle')}
+                                {inputBlockRenderer('Camera Angle', 'number', true, 'Enter angle', false, 'cameraAngle', 0, 360)}
                             </section>
                             <section className="column">
-                                {inputBlockRenderer('Camera FoV', 'number', true, 'Enter FoV', false, 'cameraFov')}
+                                {inputBlockRenderer('Camera FoV', 'number', true, 'Enter FoV', false, 'cameraFov', 0, 360)}
                             </section>
                         </div>
                     </div>
-
                 </section>
-
             </aside>
 
             <article className="main-content">
-                {/* <figure>
-                    <img src={floorPlan} alt="" />
-                </figure> */}
-                <ImageWithDraggableIcon imgSrc={floorPlan} />
+                <ImageWithDraggableIcon
+                    imgSrc={floorPlan}
+                    cameraAngle={formData.cameraAngle}
+                    cameraFieldOfView={formData.cameraFov}
+                    onPositionChange={handleIconPositionChange}
+                />
             </article>
         </section>
     );
-}
+};
 
 export default AddCameraDetails;

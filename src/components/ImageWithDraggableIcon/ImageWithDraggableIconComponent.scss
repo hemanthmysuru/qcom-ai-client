@@ -1,15 +1,18 @@
 .image-with-draggable-icon {
     position: relative;
-    display: inline-block;
-}
+    user-select: none; /* Make the background image non-selectable */
 
-.background-image {
-    display: block;
-    width: 100%;
-    height: auto;
-}
+    .background-image {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
 
-.draggable-icon {
-    position: absolute;
-    cursor: pointer;
+    .draggable-icon {
+        position: absolute;
+        cursor: pointer;
+        // width: 5%; /* Adjust the width of the draggable icon as a percentage of the image width */
+        height: auto;
+        user-select: none; /* Make the icon non-selectable */
+    }
 }

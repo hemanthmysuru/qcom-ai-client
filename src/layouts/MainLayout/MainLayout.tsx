@@ -60,7 +60,7 @@ const MainLayout: React.FC<MainLayoutProps> = (props) => {
                 (listPosition !== 'left') ? (
                     <Box
                         component="main"
-                        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+                        sx={{ flexGrow: 1, p: 0, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
                     >
                         {mainContent}
                     </Box>
@@ -106,7 +106,7 @@ const MainLayout: React.FC<MainLayoutProps> = (props) => {
                 (listPosition !== 'right') ? (
                     <Box
                         component="main"
-                        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+                        sx={{ flexGrow: 1, p: 0, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
                     >
                         {mainContent}
                     </Box>

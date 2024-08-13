@@ -1,0 +1,56 @@
+// Define SCSS variables
+$checkbox-width: 40px; // Width for the checkbox
+$checkbox-height: 20px; // Height for the checkbox
+$background-color-checked: #3253dc; // Background color when checked
+$background-color-unchecked: #a6a8a8; // Background color when unchecked
+$circle-size: 16px; // Size of the sliding circle
+$circle-color: white; // Color of the sliding circle
+
+.checkbox-container {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    width: $checkbox-width;
+    height: $checkbox-height;
+    position: relative;
+
+    input {
+        opacity: 0; // Hide the native checkbox
+        width: 0;
+        height: 0;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .custom-checkbox {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: $background-color-unchecked;
+        border-radius: $checkbox-height / 2; // Rounded corners
+        transition: background-color 0.3s;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 2px; // Adjust for alignment
+            width: $circle-size;
+            height: $circle-size;
+            background-color: $circle-color;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s;
+        }
+    }
+
+    input:checked + .custom-checkbox {
+        background-color: $background-color-checked;
+    }
+
+    input:checked + .custom-checkbox::before {
+        transform: translate($checkbox-width - $circle-size - 4px, -50%); // Slide right
+    }
+}

@@ -11,11 +11,14 @@ import AlertsPage from "../pages/Alerts/AlertsPage";
 import UiElementsPage from "../pages/UiElements/UiElementsPage";
 import AnalyticsPage from "../pages/Analytics/AnalyticsPage";
 import ConfigurationsPage from "../pages/Configurations/ConfigurationsPage";
+import ZoomablePage from "../pages/zoomable/ZoomablePage";
+import ZoomableCanvasPage from "../components/zoomableCanvas/ZoomableCanvasComponent";
 
 const AppRoutes: React.FC = () => {
     // const isAuthenticated = true; // Replace with actual authentication logic
     const { isAuthenticated, user } = useAuth();
-    const userPermissions: string[] = ['admin']; // Replace with actual user permissions
+    const adminPermissions: string[] = ['admin']; // Replace with actual user permissions
+    const userPermissions: string[] = ['user']; // Replace with actual user permissions
 
     return (
         // <BrowserRouter>
@@ -24,14 +27,15 @@ const AppRoutes: React.FC = () => {
 
             <Route element={<PublicLayout />}>
                 <Route path="/" element={<PublicRoute isAuthenticated={isAuthenticated} />}>
-                    <Route index element={<HomePage />} />
+                    {/* <Route index element={<HomePage />} /> */}
                     <Route path="login" element={<LoginPage />} />
                     <Route path="ui-elements" element={<UiElementsPage />} />
+                    <Route path="zoom" element={<ZoomablePage />} />
                 </Route>
             </Route>
 
             <Route element={<ProtectedLayout />}>
-                <Route path="/" element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+                <Route path="/" element={<ProtectedRoute isAuthenticated={isAuthenticated} userPermissions={userPermissions} />}>
                     {/* <Route index element={<DashboardPage />} /> */}
                     <Route index element={<AlertsPage />} />
                     <Route path="alerts" element={<AlertsPage />} />
@@ -39,7 +43,7 @@ const AppRoutes: React.FC = () => {
                     <Route path="configurations" element={<ConfigurationsPage />} />
                 </Route>
 
-                <Route path="admin" element={<ProtectedRoute isAuthenticated={isAuthenticated} requiredPermission="admin" userPermissions={userPermissions} />}>
+                <Route path="admin" element={<ProtectedRoute isAuthenticated={isAuthenticated} requiredPermission="admin" userPermissions={adminPermissions} />}>
                     <Route index element={<AdminPage />} />
                     {/* <Route index element={<AlertsPage />} /> */}
                     {/* <Route path="alerts" element={<AlertsPage />} /> */}

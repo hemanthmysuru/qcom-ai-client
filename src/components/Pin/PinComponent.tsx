@@ -1,17 +1,20 @@
-import SvgIcon from "../SvgIcons/SvgIconComponent";
-import "./PinComponent.scss";
+import React from 'react';
+import SvgIcon from '../SvgIcons/SvgIconComponent';
+import './PinComponent.scss';
 
 interface IPinProps {
     text: string;
+    iconSize?: number;
+    onClick?: () => void; // New prop
 }
 
-const Pin: React.FC<IPinProps> = ({ text }) => {
-
+const Pin: React.FC<IPinProps> = ({ text, iconSize = 56, onClick }) => {
     return (
-        <figure className="pin">
-            <SvgIcon name="pin" width={56} />
+        <div className="pin" onClick={onClick}>
+            <SvgIcon name='pin' width={iconSize} height={iconSize} />
             <figcaption>{text}</figcaption>
-        </figure>
+        </div>
     );
 }
+
 export default Pin;

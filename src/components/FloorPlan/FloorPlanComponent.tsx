@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import floorPlan from '../../assets/images/floor-plan.png';
+// import floorPlan from '../../assets/images/floor-plan.png';
+import floorPlan from '../../assets/svgs/floor-plan.svg';
 import CustomButton from '../CustomButton/CustomButtonComponent';
 import SvgIcon from '../SvgIcons/SvgIconComponent';
 import './FloorPlanComponent.scss';
 import CameraView from '../CameraView/CameraViewComponent';
+import ZoomableCanvas from '../zoomableCanvas/ZoomableCanvasComponent';
 
 interface IfloorPlan {
     showZoomAction: boolean;
@@ -122,6 +124,19 @@ const FloorPlan: React.FC<IfloorPlan> = ({ showZoomAction, showFullScreenAction 
         };
     }, []);
 
+    const initialCameraViews = [
+        { x: 50, y: 100, cameraAngle: 15, cameraFieldOfView: 45, pinTxt: '1', showPin: true },
+        { x: 200, y: 150, cameraAngle: 30, cameraFieldOfView: 60, pinTxt: '2', showPin: true },
+        { x: 350, y: 200, cameraAngle: 45, cameraFieldOfView: 75, pinTxt: '3', showPin: true },
+        { x: 100, y: 300, cameraAngle: 60, cameraFieldOfView: 90, pinTxt: '4', showPin: true },
+        { x: 250, y: 250, cameraAngle: 75, cameraFieldOfView: 105, pinTxt: '5', showPin: true },
+        { x: 400, y: 100, cameraAngle: 90, cameraFieldOfView: 120, pinTxt: '6', showPin: true },
+        { x: 150, y: 200, cameraAngle: 105, cameraFieldOfView: 135, pinTxt: '7', showPin: true },
+        { x: 300, y: 300, cameraAngle: 120, cameraFieldOfView: 150, pinTxt: '8', showPin: true },
+        { x: 50, y: 400, cameraAngle: 135, cameraFieldOfView: 165, pinTxt: '9', showPin: true },
+        { x: 250, y: 400, cameraAngle: 150, cameraFieldOfView: 180, pinTxt: '10', showPin: true },
+    ];
+
     return (
         <section className="floor-plan">
             <div
@@ -142,16 +157,29 @@ const FloorPlan: React.FC<IfloorPlan> = ({ showZoomAction, showFullScreenAction 
                 onTouchEnd={handleTouchEnd}
                 onDoubleClick={handleDoubleClick}
             >
-                <img
+                {/* <img
                     ref={imgRef}
                     src={floorPlan}
                     alt="floor plan"
+                    draggable={false}
                     style={{
                         transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
                         transition: dragging ? 'none' : 'transform 0.3s ease'
                     }}
+                /> */}
+
+                <ZoomableCanvas
+                    imgSrc={floorPlan}
+                    // cameraAngle={formData.cameraAngle}
+                    // cameraFieldOfView={formData.cameraFov}
+                    // onPositionChange={handleIconPositionChange}
+                    camCreatable={false}
+                    cameraViewsData={initialCameraViews}
                 />
-                <CameraView cameraAngle={295} fieldOfView={180} />
+                {/* <div ref={imgRef}>
+
+                </div> */}
+                {/* <CameraView cameraAngle={295} fieldOfView={180} camSize={24} /> */}
             </div>
 
             <aside className="actions">

@@ -110,3 +110,22 @@
         }
     }
 }
+
+.logout-menu {
+    .MuiList-root {
+        padding: 0;
+        .MuiMenuItem-root {
+            font-size: 1.6rem;
+            padding: 16px 16px;
+            color: #333;
+            &:hover {
+                background-color: #f0f0f0;
+                color: #000;
+            }
+
+            &:focus {
+                background-color: #e0e0e0;
+            }
+        }
+    }
+}

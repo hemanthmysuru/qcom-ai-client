@@ -29,7 +29,9 @@ const ExpandableAlertList: React.FC<ExpandableListProps> = ({ items, onAlertView
         <section className="expandable-alert-list">
 
             <header className="list-header">
-                <label>Alerts</label>
+                <div>
+                    <h4>Alerts</h4>
+                </div>
 
                 <aside className="actions">
                     <CustomButton icon={<SvgIcon name='sort' width={16} height={16} />} variant='contained' />

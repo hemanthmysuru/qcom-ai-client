@@ -13,6 +13,8 @@ import Quadrilateral from "../../components/Quadrilateral/QuadrilateralComponent
 import floorHotspotImage from '../../assets/images/floor-hotspot1.png';
 import floorHotspotVideo from '../../assets/videos/floor-hotspot1.mp4';
 import useCustomDialogHandler from "../../components/CustomDialog/useCustomDialogHandler";
+import CustomCheckbox from "../../components/CustomCheckbox/CustomCheckboxComponent";
+import CustomSelect from "../../components/CustomSelect/CustomSelectComponent";
 
 const eventCounterList: IEventCounter[] = [
     { count: 54, icon: 'safetyInfractions', name: 'Safety Infraction' },
@@ -54,6 +56,12 @@ const UiElementsPage: React.FC = () => {
     ]);
     const { openDialog, handleOpenDialog, handleCloseDialog, handleCancelDialog, handleSaveDialog } = useCustomDialogHandler();
 
+    const [selectedOption, setSelectedOption] = useState<string>('');
+
+    const handleSelectChange = (option: string) => {
+        setSelectedOption(option);
+    };
+
     const handleOpen = () => {
         handleOpenDialog();
     }
@@ -65,6 +73,25 @@ const UiElementsPage: React.FC = () => {
 
     return (
         <section className="ui-elements-page">
+
+            <header>Toggle Checkbox</header>
+            <section className="content">
+                <CustomSelect
+                    options={['Option 1', 'Option 2', 'Option 3']}
+                    selectedOption={selectedOption}
+                    onChange={handleSelectChange}
+                />
+                <p>Selected option: {selectedOption}</p>
+            </section>
+
+            <Divider />
+
+            <header>Toggle Checkbox</header>
+            <section className="content">
+                <CustomCheckbox checked={true} onChange={(e) => (console.log(e))} />
+            </section>
+
+            <Divider />
 
             <header>Quadrilateral video</header>
             <section className="content">

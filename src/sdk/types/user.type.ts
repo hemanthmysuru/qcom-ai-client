@@ -4,4 +4,5 @@ export type UserType = {
     email: string;
     phoneNumber: string;
     username: string;
+    designation: string;
 }

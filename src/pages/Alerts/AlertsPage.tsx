@@ -54,7 +54,7 @@ const AlertsPage: React.FC = () => {
 
 
     const mainContent = (
-        <div>
+        <div style={{ padding: '24px' }}>
             <EventCountBar countList={eventCounterList} />
 
             <CustomDialog

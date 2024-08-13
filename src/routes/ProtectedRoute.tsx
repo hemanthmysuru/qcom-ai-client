@@ -15,6 +15,7 @@ const ProtectedRoute: React.FC<IProtectedRouteProps> = ({
     redirectTo = '/login'
 }) => {
     const hasPermission = requiredPermission ? userPermissions.includes(requiredPermission) : true;
+    console.log(requiredPermission, userPermissions, hasPermission, isAuthenticated);
 
     return isAuthenticated && hasPermission ? <Outlet /> : <Navigate to={redirectTo} />;
 }

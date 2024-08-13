@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './AddCameraDetailsComponent.scss';
-import floorPlan from '../../assets/images/floor-plan.png';
+// import floorPlan from '../../assets/images/floor-plan.png';
+import floorPlan from '../../assets/svgs/floor-plan.svg';
 import ImageWithDraggableIcon from '../ImageWithDraggableIcon/ImageWithDraggableIconComponent';
 import { debounce } from '../../utils/debounce';
+import ZoomableCanvas from '../zoomableCanvas/ZoomableCanvasComponent';
+import CameraView from '../CameraView/CameraViewComponent';
 
 export type FormFieldsType = {
     cameraId: string;
@@ -58,12 +61,12 @@ const AddCameraDetails: React.FC<IAddCameraDetails> = ({ onFormChange }) => {
     };
 
     // Handle changes in icon position
-    const handleIconPositionChange = (position: { x: number, y: number }) => {
+    const handleIconPositionChange = (x: number, y: number) => {
         setFormData(prevState => {
             const updatedFormData = {
                 ...prevState,
-                xCoordinate: position.x.toFixed(2),
-                yCoordinate: position.y.toFixed(2),
+                xCoordinate: x.toFixed(2),
+                yCoordinate: y.toFixed(2),
             };
             debouncedOnFormChange(updatedFormData);
             return updatedFormData;
@@ -105,6 +108,11 @@ const AddCameraDetails: React.FC<IAddCameraDetails> = ({ onFormChange }) => {
         };
     }, [debouncedOnFormChange]);
 
+    const initialCameraViews = [
+        { x: 100, y: 150, cameraAngle: 30, cameraFieldOfView: 60, pinTxt: '1' },
+        { x: 300, y: 200, cameraAngle: 45, cameraFieldOfView: 75, pinTxt: '2' },
+    ];
+
     return (
         <section className="add-camera-details">
             <aside className="left-content">
@@ -138,11 +146,20 @@ const AddCameraDetails: React.FC<IAddCameraDetails> = ({ onFormChange }) => {
             </aside>
 
             <article className="main-content">
-                <ImageWithDraggableIcon
+                {/* <ImageWithDraggableIcon
                     imgSrc={floorPlan}
                     cameraAngle={formData.cameraAngle}
                     cameraFieldOfView={formData.cameraFov}
                     onPositionChange={handleIconPositionChange}
+                    isDragging={true}
+                /> */}
+                <ZoomableCanvas
+                    imgSrc={floorPlan}
+                    cameraAngle={formData.cameraAngle}
+                    cameraFieldOfView={formData.cameraFov}
+                    onPositionChange={handleIconPositionChange}
+                    camCreatable={true}
+                // cameraViewsData={initialCameraViews}
                 />
             </article>
         </section>

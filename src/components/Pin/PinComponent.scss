@@ -1,7 +1,9 @@
 @import "../../styles/main.scss";
+@import "../../styles/mixins";
 
 .pin {
     position: relative;
+    cursor: pointer !important;
 
     figcaption {
         position: absolute;
@@ -9,12 +11,15 @@
         left: 0;
         right: 0;
         bottom: 28px;
-        font-size: $font-size-large;
+        font-size: $font-size-base !important;
         color: #fff;
-        display: flex;
-        flex-direction: row;
-        align-content: center;
-        justify-content: center;
-        align-items: center;
+        // display: flex;
+        // flex-direction: row;
+        // align-content: center;
+        // justify-content: center;
+        // align-items: flex-start;
+        @include flex-row();
+        padding-bottom: 14px;
+        user-select: none;
     }
 }

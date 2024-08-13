@@ -1,18 +1,24 @@
 .image-with-draggable-icon {
     position: relative;
-    user-select: none; /* Make the background image non-selectable */
+    width: 100%;
+    height: 100%; // Ensure the container takes up the full space
 
     .background-image {
         width: 100%;
-        height: auto;
-        display: block;
+        height: 100%;
+        object-fit: contain; // Ensure the entire image is visible
+        position: absolute;
+        top: 0;
+        left: 0;
+        /* Optional: to prevent the image from being distorted */
+        max-width: 100%;
+        max-height: 100%;
+        user-select: none;
     }
 
     .draggable-icon {
         position: absolute;
         cursor: pointer;
-        // width: 5%; /* Adjust the width of the draggable icon as a percentage of the image width */
-        height: auto;
-        user-select: none; /* Make the icon non-selectable */
+        /* Additional styles for the draggable icon if needed */
     }
 }

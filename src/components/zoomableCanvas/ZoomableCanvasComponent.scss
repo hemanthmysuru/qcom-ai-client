@@ -1,0 +1,34 @@
+.zoomable-canvas-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    width: auto;
+}
+
+.zoomable-canvas {
+    display: block; /* Remove any default inline spacing */
+    width: 100%;
+    height: 100%;
+}
+
+.camera-view-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allow clicks to pass through to the canvas */
+}
+
+.zoom-controls {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+canvas {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto !important;
+    width: auto !important;
+}

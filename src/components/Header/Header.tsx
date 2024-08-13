@@ -10,6 +10,7 @@ import './Header.scss';
 import SvgIcon from '../SvgIcons/SvgIconComponent';
 import { NavLink, useLocation } from 'react-router-dom';
 import RippleEffect from '../RippleEffect/RippleEffect';
+import { useAuth } from '../../context/AuthContext';
 
 const useMenu = () => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -37,6 +38,8 @@ const Header: React.FC = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const location = useLocation();
+
+    const { user, logout } = useAuth();
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
         if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
@@ -74,36 +77,25 @@ const Header: React.FC = () => {
     const silhouetteRenderer = () => {
         return (
             <>
-                <RippleEffect as="section" className="ripple-box user-info">
+                <RippleEffect as="section" className="ripple-box user-info" onClick={handleMenu}>
                     <div className="silhouette-and-info">
-                        <figure className="silhouette">PB</figure>
+                        <figure className="silhouette">{user?.firstName.charAt(0)}{user?.lastName.charAt(0)}</figure>
                         <article className="info">
-                            <label>Peter Bishop</label>
-                            <span>Ops Manager</span>
+                            <label>{`${user?.firstName} ${user?.lastName}`}</label>
+                            <span>{user?.designation}</span>
                         </article>
                     </div>
                     <figure className="action-arrow">
                         <SvgIcon name="arrowDown" height={24} />
                     </figure>
                 </RippleEffect>
-                {/* <section className="user-info" onClick={handleMenu}>
-                    <div className="silhouette-and-info">
-                        <figure className="silhouette">PB</figure>
-                        <article className="info">
-                            <label>Peter Bishop</label>
-                            <span>Ops Manager</span>
-                        </article>
-                    </div>
-                    <figure className="action-arrow">
-                        <SvgIcon name="arrowDown" height={24} />
-                    </figure>
-                </section> */}
                 <Menu
+                    className='logout-menu'
                     anchorEl={anchorEl}
                     open={open}
                     onClose={handleClose}
                     anchorOrigin={{
-                        vertical: 'top',
+                        vertical: 'bottom',
                         horizontal: 'right',
                     }}
                     transformOrigin={{
@@ -111,8 +103,8 @@ const Header: React.FC = () => {
                         horizontal: 'right',
                     }}
                 >
-                    <MenuItem>Peter Bishop</MenuItem>
-                    <MenuItem>Ops Manager</MenuItem>
+                    <MenuItem onClick={logout}>Logout</MenuItem>
+                    {/* <MenuItem>Ops Manager</MenuItem> */}
                 </Menu>
             </>
         )
@@ -171,39 +163,6 @@ const Header: React.FC = () => {
 
     const nonMobileViewNavListRenderer = () => {
         return navListRenderer();
-        return (
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Button startIcon={<Notifications />} sx={{ color: 'white' }}>
-                    Alert
-                </Button>
-                <Button startIcon={<BarChart />} sx={{ color: 'white' }}>
-                    Analytics
-                </Button>
-                <Button startIcon={<Settings />} sx={{ color: 'white' }}>
-                    Configurations
-                </Button>
-
-                <IconButton onClick={handleMenu} sx={{ ml: 2 }}>
-                    <Avatar>U</Avatar>
-                </IconButton>
-                <Menu
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                >
-                    <MenuItem disabled>Username</MenuItem>
-                    <MenuItem>Designation</MenuItem>
-                </Menu>
-            </Box>
-        )
     }
 
     const logoAndAppNameRenderer = () => {

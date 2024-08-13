@@ -17,27 +17,20 @@ const LoginPage: React.FC = () => {
     const { login } = useAuth();
 
     const dispatch = useDispatch();
-    const dummyUserStore = () => {
-        dispatch(setUser({
-            firstName: 'Hemanth',
-            lastName: 'Kumar',
-            email: 'hemanthkumarmk19@gmail.com',
-            phoneNumber: '+91 9741163543',
-            username: 'hemanth'
-        }))
-    }
+    // const dummyUserStore = () => {
+    //     dispatch(setUser({
+    //         firstName: 'Hemanth',
+    //         lastName: 'Kumar',
+    //         email: 'hemanthkumarmk19@gmail.com',
+    //         phoneNumber: '+91 9741163543',
+    //         username: 'hemanth'
+    //     }))
+    // }
 
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // Use login function from AuthContext
         login(username, password);
-        // Navigate to home page or admin page based on user role
-        if (username === 'admin' && password === 'admin') {
-            dummyUserStore();
-            navigate('/alerts'); // Redirect to admin page if admin
-        } else {
-            navigate('/'); // Redirect to home page if user
-        }
     }
 
     userService.getUsers().then((data: any) => {

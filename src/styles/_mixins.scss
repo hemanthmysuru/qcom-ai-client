@@ -1,4 +1,5 @@
 // _mixins.scss
+@import "./main.scss";
 
 // Mixin for ripple effect
 @mixin ripple($color) {
@@ -150,4 +151,38 @@
     //     scrollbar-width: thin;
     //     scrollbar-color: $thumb-color $track-color;
     // }
+}
+
+@mixin list-header($headerHeight, $headerLabelBg, $headerLabelColor) {
+    height: $headerHeight;
+    width: 100%;
+    @include flex-row(space-between);
+    border-bottom: 1px solid rgba(134, 147, 168, 1);
+    margin: 16px 0;
+
+    > div {
+        background-color: $headerLabelBg;
+        height: 46px;
+        width: 121px;
+        text-align: center;
+        @include flex-column();
+        height: 100%;
+        line-height: 21px;
+
+        h4 {
+            font-size: $font-size-base;
+            font-weight: 500;
+            color: $headerLabelColor;
+        }
+    }
+
+    .actions {
+        @include flex-row();
+        column-gap: 8px;
+        button {
+            // width: 32px;
+            // height: 32px;
+            background-color: #68b5c7;
+        }
+    }
 }

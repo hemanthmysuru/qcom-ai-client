@@ -1,0 +1,70 @@
+// Define SCSS variables
+$select-bg-color: #ffffff;
+$select-border-color: #cccccc;
+$select-border-radius: 8px;
+$select-arrow-color: #464646;
+$select-option-bg-color: #f9f9f9;
+$select-option-hover-bg-color: #e0e0e0;
+$select-selected-bg-color: #3253dc; // Blue background for selected option
+$select-header-color: #464646;
+$select-height: 38px;
+$select-padding: 16px 8px 16px 16px;
+
+.custom-select {
+    position: relative;
+    display: inline-block;
+    width: 200px; // Adjust width as needed
+
+    .custom-select__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: $select-height;
+        padding: $select-padding;
+        background-color: $select-bg-color;
+        border: 1px solid $select-border-color;
+        border-radius: $select-border-radius;
+        cursor: pointer;
+        color: $select-header-color;
+
+        .custom-select__arrow {
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s;
+
+            &.open {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    .custom-select__options {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: $select-bg-color;
+        border: 1px solid $select-border-color;
+        border-radius: $select-border-radius;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        z-index: 2;
+        overflow: hidden;
+
+        .custom-select__option {
+            padding: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: $select-option-hover-bg-color;
+            }
+            &.selected {
+                background-color: $select-selected-bg-color;
+                &:hover {
+                    background-color: darken($select-selected-bg-color, 10%);
+                }
+                color: #ffffff; // Ensure text is readable on blue background
+            }
+        }
+    }
+}

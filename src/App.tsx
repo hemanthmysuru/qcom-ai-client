@@ -12,14 +12,15 @@ const App: React.FC<IProps> = ({ appConfig, userConfig }) => {
     console.log('AppConfig:: ', appConfig);
     console.log('UserConfig:: ', userConfig);
 
-    const dispatch = useDispatch();
-    dispatch(setUser({
-        firstName: 'Hemanth',
-        lastName: 'Kumar',
-        email: 'hemanthkumarmk19@gmail.com',
-        phoneNumber: '+91 9741163543',
-        username: 'hemanth'
-    }))
+    // const dispatch = useDispatch();
+    // dispatch(setUser({
+    //     firstName: 'Hemanth',
+    //     lastName: 'Kumar',
+    //     email: 'hemanthkumarmk19@gmail.com',
+    //     phoneNumber: '+91 9741163543',
+    //     username: 'hemanth',
+    //     designation: 'Ops Manager'
+    // }))
 
     return (
         <AppRoutes />

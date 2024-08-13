@@ -4,44 +4,15 @@
 $headerHeight: 60px;
 
 .camera-list-container {
-    padding: 8px;
+    padding: 16px;
     background-color: var(--config-cam-list-bg-color);
     height: 100%;
     @include flex-column();
     row-gap: 8px;
 
     .list-header {
-        height: $headerHeight;
-        width: 100%;
-        @include flex-row(space-between);
-        border-bottom: 1px solid rgba(134, 147, 168, 1);
-        margin: 16px 0;
-
-        > div {
-            background-color: var(--primary-color);
-            height: 46px;
-            width: 121px;
-            text-align: center;
-            @include flex-column();
-            height: 100%;
-            line-height: 21px;
-
-            h4 {
-                font-size: $font-size-base;
-                font-weight: 500;
-                color: var(--white-color);
-            }
-        }
-
-        .actions {
-            @include flex-row();
-            column-gap: 16px;
-            button {
-                // width: 32px;
-                // height: 32px;
-                background-color: #68b5c7;
-            }
-        }
+        @include list-header($headerHeight, var(--primary-color), var(--white-color));
+        margin-top: 0px;
     }
 
     .list-content {

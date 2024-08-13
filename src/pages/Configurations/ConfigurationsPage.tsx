@@ -1,4 +1,5 @@
 import CameraList from "../../components/CameraList/CameraListComponent";
+import ConfigAction from "../../components/ConfigAction/ConfigActionComponent";
 import MainLayout from "../../layouts/MainLayout/MainLayout";
 import './ConfigurationsPage.scss'
 
@@ -9,9 +10,10 @@ const ConfigurationsPage: React.FC = () => {
     );
 
     const mainContent = (
-        <>
-            main content
-        </>
+        // <>
+        //     main content
+        // </>
+        <ConfigAction />
     );
 
 

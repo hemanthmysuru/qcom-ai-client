@@ -16,6 +16,9 @@ $inputHeight: 42px;
     align-content: center;
     justify-content: center;
     align-items: center;
+    background: url("../../assets/svgs/login-bg.svg") no-repeat center center;
+    background-size: cover;
+    position: relative;
 
     form {
         background: #fff;

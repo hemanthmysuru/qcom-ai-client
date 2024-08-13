@@ -7,6 +7,7 @@ import userService from "../../sdk/services/userService";
 import CustomButton from "../../components/CustomButton/CustomButtonComponent";
 import './LoginPage.scss';
 import SvgIcon from "../../components/SvgIcons/SvgIconComponent";
+import footerImg from "../../assets/svgs/login-footer-logo.svg";
 
 
 const LoginPage: React.FC = () => {
@@ -97,6 +98,9 @@ const LoginPage: React.FC = () => {
 
             </form>
 
+            <footer className="login-footer-img">
+                <img src={footerImg} alt="" />
+            </footer>
 
         </section >
     );

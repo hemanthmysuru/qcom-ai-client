@@ -112,4 +112,13 @@ $inputHeight: 42px;
             }
         }
     }
+
+    .login-footer-img {
+        position: absolute;
+        bottom: 0;
+        transform: translate(0%, -50%);
+        img {
+            height: 36px;
+        }
+    }
 }

@@ -17,6 +17,14 @@ $sideContentWidth: 512px;
     // row-gap: 16px;
     // margin-top: 8px;
     padding: 24px;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    @include thin-scrollbar(
+        var(--scrollbar-thumb-color),
+        var(--scrollbar-track-color),
+        var(--scrollbar-thumb-hover-color)
+    );
 
     .action-list-and-zone,
     .custom-alert-block {

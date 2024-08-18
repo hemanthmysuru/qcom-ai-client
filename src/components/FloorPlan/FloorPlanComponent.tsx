@@ -157,7 +157,7 @@ const FloorPlan: React.FC<IfloorPlan> = ({ showZoomAction, showFullScreenAction 
                 onTouchEnd={handleTouchEnd}
                 onDoubleClick={handleDoubleClick}
             >
-                {/* <img
+                <img
                     ref={imgRef}
                     src={floorPlan}
                     alt="floor plan"
@@ -166,16 +166,16 @@ const FloorPlan: React.FC<IfloorPlan> = ({ showZoomAction, showFullScreenAction 
                         transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
                         transition: dragging ? 'none' : 'transform 0.3s ease'
                     }}
-                /> */}
+                />
 
-                <ZoomableCanvas
+                {/* <ZoomableCanvas
                     imgSrc={floorPlan}
                     // cameraAngle={formData.cameraAngle}
                     // cameraFieldOfView={formData.cameraFov}
                     // onPositionChange={handleIconPositionChange}
                     camCreatable={false}
                     cameraViewsData={initialCameraViews}
-                />
+                /> */}
                 {/* <div ref={imgRef}>
 
                 </div> */}

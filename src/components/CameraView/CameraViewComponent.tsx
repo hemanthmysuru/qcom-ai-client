@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Pin from '../Pin/PinComponent';
 import SvgIcon, { iconNameTypes } from '../SvgIcons/SvgIconComponent';
 import './CameraViewComponent.scss';
@@ -30,6 +30,10 @@ const CameraView: React.FC<ICameraView> = ({
     // Calculate sizes based on camSize
     const camCoverageSize = camSize * 3;
     const camIconSize = camSize / 3;
+
+    useEffect(() => {
+        console.log('cameraAngle:: ', cameraAngle);
+    }, [cameraAngle]);
 
     // Utility function to set custom properties
     const getCustomProperties = (angle: number, fov: number): React.CSSProperties => ({

@@ -323,7 +323,7 @@ const SvgIcon: React.FC<IconProps> = ({ name, color, width, height }) => {
             case 'arrowDownBlue':
                 return (
                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6.24951 9.375L12.4995 15.625L18.7495 9.375" stroke="#3253DC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M6.24951 9.375L12.4995 15.625L18.7495 9.375" stroke="#3253DC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 );
             case 'footerLogo':

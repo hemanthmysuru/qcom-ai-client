@@ -5,25 +5,19 @@ import './CameraListComponent.scss';
 import floorPlan from '../../assets/images/floor-plan.png';
 import CustomDialog from '../CustomDialog/CustomDialogComponent';
 import useCustomDialogHandler from '../CustomDialog/useCustomDialogHandler';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddCameraDetails, { FormFieldsType } from '../AddCameraDetails/AddCameraDetailsComponent';
+import { CameraConfigType } from '../../sdk/types/cameraConfig.type';
 
-interface ICameraDetails {
-    id: number;
-    name: string,
-}
+// interface ICameraDetails {
+//     id: number;
+//     cameraName: string,
+// }
 interface ICameraList {
-    list: ICameraDetails[];
-}
-
-const cameraList: ICameraList = {
-    list: [
-        { id: 1, name: 'Cam ID - Camera #1' }, { id: 2, name: 'Cam ID - Camera #2' }, { id: 3, name: 'Cam ID - Camera #2' },
-        { id: 4, name: 'Cam ID - Camera #2' }, { id: 5, name: 'Cam ID - Camera #2' }, { id: 6, name: 'Cam ID - Camera #2' },
-        { id: 7, name: 'Cam ID - Camera #2' }, { id: 8, name: 'Cam ID - Camera #2' }, { id: 9, name: 'Cam ID - Camera #2' },
-        { id: 10, name: 'Cam ID - Camera #2' }, { id: 11, name: 'Cam ID - Camera #2' }, { id: 12, name: 'Cam ID - Camera #2' },
-        { id: 13, name: 'Cam ID - Camera #2' }, { id: 14, name: 'Cam ID - Camera #2' }, { id: 15, name: 'Cam ID - Camera #2' },
-    ]
+    list: CameraConfigType[];
+    selectedCamera: CameraConfigType | null;
+    updateSelectedCamera: (selected: CameraConfigType) => void;
+    addCamera: (cameraFormData: FormFieldsType) => void
 }
 
 interface IDialogProps {
@@ -36,17 +30,18 @@ interface IDialogProps {
     onCancel: () => void;
 }
 
-const CameraList: React.FC = () => {
-
+const CameraList: React.FC<ICameraList> = ({ list, selectedCamera, updateSelectedCamera, addCamera }) => {
     const { openDialog, handleOpenDialog, handleCloseDialog, handleCancelDialog, handleSaveDialog } = useCustomDialogHandler();
-    const [cameraToDelete, setCameraToDelete] = useState<ICameraDetails | null>(null);
+    const [cameraToDelete, setCameraToDelete] = useState<CameraConfigType | null>(null);
     const [dialogProps, setDialogProps] = useState<IDialogProps | null>(null);
+    const [addCameraFormData, setAddCameraFormData] = useState<FormFieldsType | null>(null);
 
-    const handleListItemClick = (event: any) => {
-        console.log('camera list item clicked', event);
+    const handleListItemClick = (cam: CameraConfigType) => {
+        console.log('camera list item clicked', cam);
+        updateSelectedCamera(cam);
     }
 
-    const handleListItemDeleteBtnClick = (data: ICameraDetails) => {
+    const handleListItemDeleteBtnClick = (data: CameraConfigType) => {
         console.log('handleListItemDeleteBtnClick', data);
         setDialogProps({
             title: 'Delete camera',
@@ -73,13 +68,21 @@ const CameraList: React.FC = () => {
             cancelText: 'Cancel',
             saveText: 'Save',
             onSave: () => {
-                console.log('add camera save button click');
+                handleAddCamera()
+                handleCloseDialog();
             },
             onCancel: () => {
                 handleCloseDialog();
             }
         })
         handleOpenDialog();
+    }
+
+    const handleAddCamera = () => {
+        console.log('add camera save button click', addCameraFormData);
+        if (addCameraFormData) {
+            addCamera(addCameraFormData);
+        }
     }
 
     const handleDialogDeleteCameraClick = () => {
@@ -97,13 +100,12 @@ const CameraList: React.FC = () => {
 
     const handleAddCameraDetailsFormChange = (data: FormFieldsType) => {
         console.log('handleAddCameraDetailsFormChange::', data);
+        setAddCameraFormData(data);
     }
 
     const addCameraDialogContent: JSX.Element = (
         <AddCameraDetails onFormChange={handleAddCameraDetailsFormChange} />
     );
-
-
 
     const customDialogRenderer = () => {
         if (!dialogProps) return null;
@@ -129,7 +131,7 @@ const CameraList: React.FC = () => {
                 <header className='list-header'>
 
                     <div>
-                        <h4>{cameraList?.list?.length}</h4>
+                        <h4>{list?.length}</h4>
                         <h4>Fixed camera</h4>
                     </div>
 
@@ -140,17 +142,28 @@ const CameraList: React.FC = () => {
                 </header>
 
                 <aside className="list-content">
-                    <ul className="list">
-                        {
-                            cameraList.list.map((cam: ICameraDetails, index: number) => (
-                                <RippleEffect as="li" key={cam.id} className={`item ripple-list-item ${index === 0 ? 'selected' : ''}`} onClick={() => handleListItemClick(index)}>
-                                    <label>{cam.name}</label>
-                                    <CustomButton icon={<SvgIcon name='delete' width={16} height={16} />} variant='outlined' onClick={() => handleListItemDeleteBtnClick(cam)} />
+                    {
+                        list?.length ? (
+                            <ul className="list">
+                                {
+                                    list.map((cam: CameraConfigType, index: number) => (
+                                        <RippleEffect as="li" key={cam.id} className={`item ripple-list-item ${selectedCamera?.id === cam?.id ? 'selected' : ''}`} onClick={() => handleListItemClick(cam)}>
+                                            <label>{cam.cameraId}</label>
+                                            <CustomButton icon={<SvgIcon name='delete' width={16} height={16} />} variant='outlined' onClick={() => handleListItemDeleteBtnClick(cam)} />
+                                        </RippleEffect>
+                                    ))
+                                }
+                            </ul>
+                        ) : (
+                            <div className="no-list-items">
+                                <p>No cameras to show.</p>
+                                <RippleEffect as="div">
+                                    <CustomButton text='Add camera' variant='contained' onClick={() => handleAddCameraBtnClick()} />
                                 </RippleEffect>
-                            ))
-                        }
+                            </div>
+                        )
+                    }
 
-                    </ul>
                 </aside>
 
             </section>

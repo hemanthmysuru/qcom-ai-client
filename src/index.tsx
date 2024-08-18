@@ -7,6 +7,7 @@ import { AuthProvider } from './context/AuthContext';
 import { Provider } from 'react-redux';
 import store from './sdk/redux/store/store';
 import AppInit from './AppInit';
+import LoadingOverlay from './components/LoadingOverlay/LoadingOverlayComponent';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -16,6 +17,7 @@ root.render(
         <Provider store={store}>
             <BrowserRouter>
                 <AuthProvider>
+                    <LoadingOverlay />
                     <AppInit />
                 </AuthProvider>
             </BrowserRouter>

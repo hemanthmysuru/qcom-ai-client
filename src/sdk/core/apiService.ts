@@ -1,13 +1,19 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import envConfig from '../../EnvConfig';
+import { generateUUID } from '../utils/utils';
+import { useLoading } from '../../context/LoadingContext';
+import EventBus from '../utils/eventEmitter';
 
 class ApiService {
 
     private static instance: ApiService;
     private apiClient: AxiosInstance;
+    private loading: any;
 
     constructor() {
         // Get the base URL from environment variables
-        const baseURL = process.env.REACT_APP_API_BASE_URL;
+        const baseURL = envConfig.apiUrl;
+        console.log(baseURL, envConfig.env);
 
         this.apiClient = axios.create({
             baseURL,
@@ -15,6 +21,8 @@ class ApiService {
                 'Content-Type': 'application/json',
             },
         });
+
+        // this.loading = useLoading();
 
         // Set up interceptors
         this.initializeRequestInterceptor();
@@ -34,11 +42,19 @@ class ApiService {
         this.apiClient.interceptors.request.use(
             // (config: AxiosRequestConfig) => {
             (config) => {
-                // Modify config if necessary, e.g., adding authorization headers
-                // config.headers.Authorization = `Bearer ${yourAuthToken}`;
+                // this.loading.showLoading();
+                const transactionId = config.headers['X-Transaction-ID'] || generateUUID();
+
+                // Set the X-Transaction-ID header if it hasn't been explicitly set or removed
+                if (transactionId) {
+                    config.headers['X-Transaction-ID'] = transactionId;
+                }
+                EventBus.emit('loading', true);
                 return config;
             },
             (error) => {
+                // this.loading.hideLoading();
+                EventBus.emit('loading', false);
                 // Handle request error
                 return Promise.reject(error);
             }
@@ -48,8 +64,14 @@ class ApiService {
     // Method to initialize response interceptors
     private initializeResponseInterceptor() {
         this.apiClient.interceptors.response.use(
-            (response: AxiosResponse) => response,
+            (response: AxiosResponse) => {
+                // this.loading.hideLoading();
+                EventBus.emit('loading', false);
+                return response;
+            },
             (error) => {
+                // this.loading.hideLoading();
+                EventBus.emit('loading', false);
                 // Handle response errors
                 return Promise.reject(error);
             }
@@ -77,6 +99,11 @@ class ApiService {
     // Generic DELETE request
     public async delete<T>(url: string): Promise<T> {
         const response = await this.apiClient.delete<T>(url);
+        return response.data;
+    }
+
+    public async patch<T>(url: string, data: any): Promise<T> {
+        const response = await this.apiClient.patch<T>(url, data);
         return response.data;
     }
 }

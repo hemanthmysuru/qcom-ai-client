@@ -15,3 +15,14 @@
 //     .main-content {
 //     }
 // }
+.alerts-page {
+    .alert-box-and-cam-view {
+        position: relative;
+
+        .alert-box {
+            position: absolute;
+            bottom: 112%;
+            left: -50%;
+        }
+    }
+}

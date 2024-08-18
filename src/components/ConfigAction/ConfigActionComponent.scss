@@ -178,4 +178,10 @@ $sideContentWidth: 512px;
             }
         }
     }
+
+    .no-camera-selected {
+        @include flex-column();
+        row-gap: 8px;
+        height: 100%;
+    }
 }

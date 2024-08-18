@@ -11,11 +11,9 @@ const AdminPage: React.FC = () => {
             <h3>Admin Page</h3>
             {user ? (
                 <ul>
-                    <li>{user.username}</li>
-                    <li>{user.firstName}</li>
-                    <li>{user.lastName}</li>
-                    <li>{user.email}</li>
-                    <li>{user.phoneNumber}</li>
+                    <li>{user?.firstName}</li>
+                    <li>{user?.lastName}</li>
+                    <li>{user?.emailId}</li>
                 </ul>
             ) : <></>}
         </section>

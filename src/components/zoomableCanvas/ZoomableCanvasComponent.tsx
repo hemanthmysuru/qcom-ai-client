@@ -132,12 +132,6 @@ const ZoomableCanvas: React.FC<ZoomableCanvasProps> = ({
         setCameraViews([]);
     };
 
-    const handlePinClick = (view: CameraViewData) => {
-        if (showAlertBoxOnPinClick) {
-            alert(`Pin clicked at (${view.x}, ${view.y})`);
-        }
-    };
-
     return (
         <div className="zoomable-canvas-container">
             <canvas
@@ -160,7 +154,6 @@ const ZoomableCanvas: React.FC<ZoomableCanvasProps> = ({
                             top: `${view.y}px`,
                             transform: 'translate(-50%, -50%)',
                         }}
-                        onPinClick={() => handlePinClick(view)} // Pass click handler
                     />
                 ))}
             </div>

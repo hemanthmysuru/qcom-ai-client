@@ -16,9 +16,7 @@ const App: React.FC<IProps> = ({ appConfig, userConfig }) => {
     // dispatch(setUser({
     //     firstName: 'Hemanth',
     //     lastName: 'Kumar',
-    //     email: 'hemanthkumarmk19@gmail.com',
-    //     phoneNumber: '+91 9741163543',
-    //     username: 'hemanth',
+    //     emailId: 'hemanthkumarmk19@gmail.com',
     //     designation: 'Ops Manager'
     // }))
 

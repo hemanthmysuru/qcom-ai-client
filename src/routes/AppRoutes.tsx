@@ -11,14 +11,19 @@ import AlertsPage from "../pages/Alerts/AlertsPage";
 import UiElementsPage from "../pages/UiElements/UiElementsPage";
 import AnalyticsPage from "../pages/Analytics/AnalyticsPage";
 import ConfigurationsPage from "../pages/Configurations/ConfigurationsPage";
-import ZoomablePage from "../pages/zoomable/ZoomablePage";
-import ZoomableCanvasPage from "../components/zoomableCanvas/ZoomableCanvasComponent";
+// import ZoomablePage from "../components/zoomable/ZoomablePage";
 
 const AppRoutes: React.FC = () => {
     // const isAuthenticated = true; // Replace with actual authentication logic
     const { isAuthenticated, user } = useAuth();
     const adminPermissions: string[] = ['admin']; // Replace with actual user permissions
     const userPermissions: string[] = ['user']; // Replace with actual user permissions
+
+    const dynamicComponents = [
+        { component: <div>Component 1</div>, position: { x: '10%', y: '20%' } },
+        { component: <div>Component 2</div>, position: { x: '30%', y: '50%' } },
+        // Add more components as needed
+    ];
 
     return (
         // <BrowserRouter>
@@ -30,7 +35,7 @@ const AppRoutes: React.FC = () => {
                     {/* <Route index element={<HomePage />} /> */}
                     <Route path="login" element={<LoginPage />} />
                     <Route path="ui-elements" element={<UiElementsPage />} />
-                    <Route path="zoom" element={<ZoomablePage />} />
+                    {/* <Route path="zoom" element={<ZoomablePage components={dynamicComponents} />} /> */}
                 </Route>
             </Route>
 

@@ -6,7 +6,7 @@ import authService from "../sdk/services/authService";
 interface IAuthContext {
     isAuthenticated: boolean;
     user: UserType | null;
-    login: (username: string, password: string) => void;
+    login: (email: string, password: string) => void;
     logout: () => void
 }
 
@@ -25,14 +25,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [user, setUser] = useState<UserType | null>(null);
     const navigate = useNavigate();
 
-    const login = async (username: string, password: string) => {
+    const login = async (email: string, password: string) => {
         try {
-            const user = await authService.login(username, password);
+            const user = await authService.login(email, password);
+            console.log(user);
             setIsAuthenticated(true);
             setUser(user);
-            // navigate('/alerts');
         } catch (error) {
-            // alert('Invalid credentials');
+            console.error('Login error:', error);
         }
     };
 

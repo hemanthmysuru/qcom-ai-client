@@ -1,44 +1,70 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import { setUser } from "../../sdk/redux/slices/userSlice";
-import userService from "../../sdk/services/userService";
-import CustomButton from "../../components/CustomButton/CustomButtonComponent";
-import './LoginPage.scss';
-import SvgIcon from "../../components/SvgIcons/SvgIconComponent";
 import footerImg from "../../assets/svgs/login-footer-logo.svg";
+import CustomButton from "../../components/CustomButton/CustomButtonComponent";
+import SvgIcon from "../../components/SvgIcons/SvgIconComponent";
+import { useAuth } from "../../context/AuthContext";
+import './LoginPage.scss';
+
+const autoFeedLoginCreds = {
+    emailId: 'admin@email.com',
+    password: 'smart123'
+}
 
 
 const LoginPage: React.FC = () => {
 
-    const [username, setUsername] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const navigate = useNavigate();
     const { login } = useAuth();
-
     const dispatch = useDispatch();
-    // const dummyUserStore = () => {
-    //     dispatch(setUser({
-    //         firstName: 'Hemanth',
-    //         lastName: 'Kumar',
-    //         email: 'hemanthkumarmk19@gmail.com',
-    //         phoneNumber: '+91 9741163543',
-    //         username: 'hemanth'
-    //     }))
-    // }
 
-    const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+
+    // Auto-fill login credentials in development mode
+    useEffect(() => {
+        if (process.env.NODE_ENV === 'development') {
+            setEmail(autoFeedLoginCreds.emailId);
+            setPassword(autoFeedLoginCreds.password);
+        }
+    }, []);
+
+    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Use login function from AuthContext
-        login(username, password);
+        // const hashedPassword = hashPassword(password);
+        const hashedPassword = password;
+        try {
+            await login(email, hashedPassword);
+        } catch (error) {
+            console.error('Login error:', error);
+        }
     }
 
-    userService.getUsers().then((data: any) => {
-        console.log('getUsers :: ', data);
-    }).catch((e: any) => {
-        console.log('getUsers:: ', e);
-    })
+    // userService.getUsers().then((data: any) => {
+    //     console.log('getUsers :: ', data);
+    // }).catch((e: any) => {
+    //     console.log('getUsers:: ', e);
+    // })
+
+    const renderInputBox = (labelName: string, inputType: 'text' | 'password', placeholderTxt: string, inputValue: string, iconName: 'at' | 'lock') => (
+        <article className="input-and-label">
+            <label>{labelName}</label>
+
+            <div className="input-box">
+                <input
+                    className="inputBox"
+                    type={inputType}
+                    placeholder={placeholderTxt}
+                    value={inputValue}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <figure className="icon">
+                    <SvgIcon name={iconName} width={16} height={16} />
+                </figure>
+            </div>
+        </article>
+    );
 
     return (
         <section className="login-page">
@@ -52,48 +78,9 @@ const LoginPage: React.FC = () => {
                 </header>
 
                 <div className="content">
-
-                    <article className="input-and-label">
-                        <label>Your email</label>
-
-                        <div className="input-box">
-                            <input
-                                className="inputBox"
-                                type="text"
-                                placeholder="Username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                            />
-                            <figure className="icon">
-                                <SvgIcon name="at" width={16} height={16} />
-                            </figure>
-                        </div>
-                    </article>
-
-                    <article className="input-and-label">
-                        <label>Password</label>
-
-                        <div className="input-box">
-                            <input
-                                className="inputBox"
-                                type="password"
-                                placeholder="Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            <figure className="icon">
-                                <SvgIcon name="lock" height={16} />
-                            </figure>
-                        </div>
-                    </article>
-
-                    <CustomButton
-                        className="submit-btn"
-                        text="Login"
-                        type="submit"
-                    />
-
-                    {/* <button className='button' type="submit">Login</button> */}
+                    {renderInputBox('Your email', 'text', 'Enter email id', email, 'at')}
+                    {renderInputBox('Password', 'password', 'Enter password', email, 'lock')}
+                    <CustomButton className="submit-btn" text="Login" type="submit" />
                 </div>
 
             </form>

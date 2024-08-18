@@ -37,6 +37,7 @@ $default-cam-icon-size: $default-cam-bg-size / 3;
             transform: rotate(var(--camera-angle, 0deg)); // Default to 0deg if variable is not set
             box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
             z-index: 2; // Ensure camera is above coverage
+            cursor: pointer;
 
             svg {
                 width: var(--cam-icon-size);

@@ -7,6 +7,10 @@ import EventCountBar, { IEventCounter } from '../../components/EventCountBar/Eve
 import CustomDialog from '../../components/CustomDialog/CustomDialogComponent';
 import useCustomDialogHandler from '../../components/CustomDialog/useCustomDialogHandler';
 import FloorPlan from '../../components/FloorPlan/FloorPlanComponent';
+import ZoomablePage from '../../components/zoomable/ZoomablePage';
+import CameraView from '../../components/CameraView/CameraViewComponent';
+import AlertBox from '../../components/AlertBox/AlertBoxComponent';
+import SvgIcon from '../../components/SvgIcons/SvgIconComponent';
 
 
 const Expandableitems = [
@@ -33,6 +37,8 @@ const eventCounterList: IEventCounter[] = [
 const AlertsPage: React.FC = () => {
     const { openDialog, handleOpenDialog, handleCloseDialog, handleCancelDialog, handleSaveDialog } = useCustomDialogHandler();
 
+    const [selectedCamView, setSelectedCamView] = useState<string>();
+
     const handleAlertViewDetailsClick = () => {
         handleOpenDialog();
     }
@@ -52,9 +58,74 @@ const AlertsPage: React.FC = () => {
         </section>
     );
 
+    const alertBoxRenderer = () => {
+        return (
+            <AlertBox
+                headerLabel="Unattended"
+                subHeaderLabel="Production zone"
+                subHeaderIcon={<SvgIcon name='location' />}
+                footerLabel="Cam ID - #2"
+                timestamp="07-22-2024 | 12:09 AM"
+                showActionSection={true}
+                showViewDetailsBtn={true}
+                thumbnails={{
+                    image: 'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
+                    video: 'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg'
+                }}
+                onAlertViewDetailsClick={function (): void {
+                    // throw new Error("Function not implemented.");
+                    console.log('Alert box:: ',);
+                }} />
+        );
+    }
+
+    const alertBoxAndCameraViewRenderer = (id: string) => {
+        return (
+            <section className="alert-box-and-cam-view">
+                {selectedCamView == id && alertBoxRenderer()}
+                <CameraView
+                    cameraAngle={100}
+                    fieldOfView={100}
+                    showPin={true}
+                    pinTxt='20'
+                    onPinClick={() => {
+                        console.log(this);
+                        setSelectedCamView(id);
+                    }}
+                />
+            </section>
+        );
+    }
+
+    const dynamicComponents = [
+        {
+            component: alertBoxAndCameraViewRenderer('1'),
+            position: { x: '10%', y: '20%' },
+            id: '1',
+        },
+        {
+            component: alertBoxAndCameraViewRenderer('2'),
+            position: { x: '30%', y: '50%' },
+            id: '2'
+        },
+    ];
+
+    const handleComponentPositionChange = (position: { x: string; y: string }) => {
+        console.log(`Updated/Created component position: x=${position.x}, y=${position.y}`);
+    }
+
+    const draggableCam = (<CameraView
+        cameraAngle={100}
+        fieldOfView={100}
+        showPin={false}
+        onPinClick={() => {
+            console.log(this);
+            // setSelectedCamView(id);
+        }}
+    />);
 
     const mainContent = (
-        <div style={{ padding: '24px' }}>
+        <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <EventCountBar countList={eventCounterList} />
 
             <CustomDialog
@@ -71,7 +142,17 @@ const AlertsPage: React.FC = () => {
 
             <br />
 
-            <FloorPlan showZoomAction={true} showFullScreenAction={true} />
+            {/* <FloorPlan showZoomAction={true} showFullScreenAction={true} /> */}
+
+            <ZoomablePage
+                components={dynamicComponents}
+                showZoomControls={true}
+                isImageDraggable={true}
+                isCamCreationAllowed={false}
+            // draggableComponent={draggableCam}
+            // createAndDraggableComp={draggableCam}
+            // onComponentPositionChange={handleComponentPositionChange} 
+            />
         </div>
     );
 

@@ -6,16 +6,17 @@ import ImageWithDraggableIcon from '../ImageWithDraggableIcon/ImageWithDraggable
 import { debounce } from '../../utils/debounce';
 import ZoomableCanvas from '../zoomableCanvas/ZoomableCanvasComponent';
 import CameraView from '../CameraView/CameraViewComponent';
+import ZoomablePage from '../zoomable/ZoomablePage';
 
 export type FormFieldsType = {
     cameraId: string;
     cameraName: string;
     rtspUrl: string;
-    cameraLocation: string;
+    location: string;
     xCoordinate: string;
     yCoordinate: string;
     cameraAngle: number;
-    cameraFov: number;
+    fieldOfView: number;
 };
 
 interface IAddCameraDetails {
@@ -27,11 +28,11 @@ const AddCameraDetails: React.FC<IAddCameraDetails> = ({ onFormChange }) => {
         cameraId: '',
         cameraName: '',
         rtspUrl: '',
-        cameraLocation: '',
+        location: '',
         xCoordinate: '',
         yCoordinate: '',
         cameraAngle: 0,
-        cameraFov: 0,
+        fieldOfView: 0,
     });
 
     // Debounced function for handling form change
@@ -50,7 +51,7 @@ const AddCameraDetails: React.FC<IAddCameraDetails> = ({ onFormChange }) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData(prevState => {
-            const updatedValue = name === 'cameraAngle' || name === 'cameraFov'
+            const updatedValue = name === 'cameraAngle' || name === 'fieldOfView'
                 ? Math.max(0, Math.min(parseInt(value, 10), 360))
                 : value;
             const updatedFormData = { ...prevState, [name]: updatedValue };
@@ -113,6 +114,48 @@ const AddCameraDetails: React.FC<IAddCameraDetails> = ({ onFormChange }) => {
         { x: 300, y: 200, cameraAngle: 45, cameraFieldOfView: 75, pinTxt: '2' },
     ];
 
+    const handleComponentPositionChange = (position: { x: string; y: string }) => {
+        console.log(`Updated/Created component position: x=${position.x}, y=${position.y}`);
+        setFormData(prevState => {
+            const updatedFormData = {
+                ...prevState,
+                xCoordinate: position.x,
+                yCoordinate: position.y,
+            };
+            debouncedOnFormChange(updatedFormData);
+            return updatedFormData;
+        });
+    }
+
+    // const cameraViewRenderer = (formData: FormFieldsType) => {
+    //     console.log('formData:: ', formData);
+    //     return (
+    //         <CameraView
+    //             cameraAngle={formData.cameraAngle}
+    //             fieldOfView={formData.fieldOfView}
+    //             showPin={false}
+    //             onPinClick={() => {
+    //                 console.log(this);
+    //                 // setSelectedCamView(id);
+    //             }}
+    //         />
+    //     )
+    // }
+
+    const draggableComponent = {
+        component: (
+            <CameraView
+                cameraAngle={formData?.cameraAngle || 0}
+                fieldOfView={formData?.fieldOfView || 0}
+                showPin={false}
+            />
+        ),
+        cameraAngle: formData.cameraAngle,
+        fieldOfView: formData.fieldOfView
+        // ), position: { x: (selectedCamera?.x_coordinate || 0)?.toString(), y: (selectedCamera?.y_coordinate || 0)?.toString() }
+    }
+
+
     return (
         <section className="add-camera-details">
             <aside className="left-content">
@@ -123,7 +166,7 @@ const AddCameraDetails: React.FC<IAddCameraDetails> = ({ onFormChange }) => {
                         {inputBlockRenderer('Camera ID', 'text', true, 'Enter camera ID', false, 'cameraId')}
                         {inputBlockRenderer('Camera Name', 'text', true, 'Enter camera name', false, 'cameraName')}
                         {inputBlockRenderer('RTSP URL', 'text', true, 'Enter RTSP URL', false, 'rtspUrl')}
-                        {inputBlockRenderer('Camera Location', 'text', true, 'Enter camera location', false, 'cameraLocation')}
+                        {inputBlockRenderer('Camera Location', 'text', true, 'Enter camera location', false, 'location')}
                         <div className="row">
                             <section className="column">
                                 {inputBlockRenderer('x-coordinate', 'text', true, 'x-coordinate', true, 'xCoordinate')}
@@ -138,7 +181,7 @@ const AddCameraDetails: React.FC<IAddCameraDetails> = ({ onFormChange }) => {
                                 {inputBlockRenderer('Camera Angle', 'number', true, 'Enter angle', false, 'cameraAngle', 0, 360)}
                             </section>
                             <section className="column">
-                                {inputBlockRenderer('Camera FoV', 'number', true, 'Enter FoV', false, 'cameraFov', 0, 360)}
+                                {inputBlockRenderer('Camera FoV', 'number', true, 'Enter FoV', false, 'fieldOfView', 0, 360)}
                             </section>
                         </div>
                     </div>
@@ -149,18 +192,29 @@ const AddCameraDetails: React.FC<IAddCameraDetails> = ({ onFormChange }) => {
                 {/* <ImageWithDraggableIcon
                     imgSrc={floorPlan}
                     cameraAngle={formData.cameraAngle}
-                    cameraFieldOfView={formData.cameraFov}
-                    onPositionChange={handleIconPositionChange}
+                    cameraFieldOfView={formData.fieldOfView}
+                    // onPositionChange={handleIconPositionChange}
+                    onPositionChange={() => { }}
                     isDragging={true}
                 /> */}
-                <ZoomableCanvas
+                {/* <ZoomableCanvas
                     imgSrc={floorPlan}
                     cameraAngle={formData.cameraAngle}
-                    cameraFieldOfView={formData.cameraFov}
+                    cameraFieldOfView={formData.fieldOfView}
                     onPositionChange={handleIconPositionChange}
                     camCreatable={true}
                 // cameraViewsData={initialCameraViews}
-                />
+                /> */}
+
+                {/* <p>{formData?.cameraAngle}</p> */}
+
+                <ZoomablePage
+                    components={[]}
+                    showZoomControls={false}
+                    isImageDraggable={false}
+                    isCamCreationAllowed={true}
+                    draggableComponent={draggableComponent}
+                    onComponentPositionChange={handleComponentPositionChange} />
             </article>
         </section>
     );

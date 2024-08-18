@@ -102,6 +102,12 @@ $headerHeight: 60px;
                 }
             }
         }
+
+        .no-list-items {
+            @include flex-column();
+            row-gap: 8px;
+            height: 100%;
+        }
     }
 }
 

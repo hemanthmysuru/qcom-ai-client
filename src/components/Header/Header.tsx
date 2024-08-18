@@ -79,7 +79,7 @@ const Header: React.FC = () => {
             <>
                 <RippleEffect as="section" className="ripple-box user-info" onClick={handleMenu}>
                     <div className="silhouette-and-info">
-                        <figure className="silhouette">{user?.firstName.charAt(0)}{user?.lastName.charAt(0)}</figure>
+                        <figure className="silhouette">{user?.firstName?.charAt(0)}{user?.lastName?.charAt(0)}</figure>
                         <article className="info">
                             <label>{`${user?.firstName} ${user?.lastName}`}</label>
                             <span>{user?.designation}</span>

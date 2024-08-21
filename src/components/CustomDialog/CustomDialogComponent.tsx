@@ -4,11 +4,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import CustomButton from '../CustomButton/CustomButtonComponent';
 import styles from './CustomDialog.module.scss';
 import { Divider } from '@mui/material';
 import SvgIcon from '../SvgIcons/SvgIconComponent';
+import CustomButton from '../CustomButton/CustomButtonComponent';
 
 // Define the props interface for the dialog component
 export interface ICustomDialogProps {
@@ -18,6 +17,7 @@ export interface ICustomDialogProps {
     cancelText?: string;
     saveText?: string;
     dialogMaxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    isSaveDisabled?: boolean;
     onClose: () => void;
     onCancel: () => void;
     onSave: () => void;
@@ -26,13 +26,14 @@ export interface ICustomDialogProps {
 const CustomDialog: React.FC<ICustomDialogProps> = ({
     headerLabel,
     open,
-    onClose,
     content,
-    onCancel,
-    onSave,
     dialogMaxWidth = 'sm',
     cancelText = 'Cancel',
     saveText = 'Save',
+    isSaveDisabled = false,
+    onClose,
+    onCancel,
+    onSave,
 }) => {
     return (
         <Dialog
@@ -62,21 +63,13 @@ const CustomDialog: React.FC<ICustomDialogProps> = ({
                     variant="outlined"
                     className={styles.dialogOutlinedButton}
                     onClick={onCancel}
-                    sx={{
-                        border: '1px solid #878787 !important',
-                        color: '#878787 !important',
-                        '&:hover': {
-                            backgroundColor: 'var(--dialogbox-outline-btn-hover-bg) !important', // Override hover state
-                            border: '1px solid #b4b4b4 !important',
-                            color: '#b4b4b4 !important',
-                        }
-                    }}
                 />
                 <CustomButton
                     text={saveText}
                     variant="contained"
                     className={styles.dialogContainedButton}
                     onClick={onSave}
+                    disabled={isSaveDisabled}
                 />
             </DialogActions>
         </Dialog>

@@ -36,19 +36,19 @@ const endPoints: { [key: string]: any } = {
 
 
 const devConfig: IEnvConfig = {
-    apiUrl: 'http://54.91.9.32:8181/api/v1/',
+    apiUrl: 'http://52.73.179.242:8181/api/v1/',
     env: 'development',
     endPoints: endPoints,
 };
 
 const prodConfig: IEnvConfig = {
-    apiUrl: 'http://54.91.9.32:8181/api/v1/',
+    apiUrl: 'http://52.73.179.242:8181/api/v1/',
     env: 'production',
     endPoints: endPoints,
 };
 
 const stageConfig: IEnvConfig = {
-    apiUrl: 'http://54.91.9.32:8181/api/v1/',
+    apiUrl: 'http://52.73.179.242:8181/api/v1/',
     env: 'staging',
     endPoints: endPoints,
 };

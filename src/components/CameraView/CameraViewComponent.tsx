@@ -31,10 +31,6 @@ const CameraView: React.FC<ICameraView> = ({
     const camCoverageSize = camSize * 3;
     const camIconSize = camSize / 3;
 
-    useEffect(() => {
-        console.log('cameraAngle:: ', cameraAngle);
-    }, [cameraAngle]);
-
     // Utility function to set custom properties
     const getCustomProperties = (angle: number, fov: number): React.CSSProperties => ({
         '--camera-angle': `${angle}deg`,

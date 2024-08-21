@@ -68,6 +68,16 @@ $dialogbox-bg-color: var(--dialogbox-bg-color);
     }
 }
 
+.dialogOutlinedButton {
+    border: 1px solid #878787 !important;
+    color: #878787 !important;
+    &:hover {
+        background-color: var(--dialogbox-outline-btn-hover-bg) !important; // Override hover state
+        border: 1px solid #b4b4b4;
+        color: #b4b4b4;
+    }
+}
+
 .divider {
     border-color: var(--dialogbox-divider-color) !important;
 }

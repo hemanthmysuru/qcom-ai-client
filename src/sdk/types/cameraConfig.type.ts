@@ -1,10 +1,10 @@
 export type CameraConfigType = {
-    id?: number;
+    id?: string;
     cameraId?: string;
     cameraName: string;
     location: string;
-    x_coordinate: number;
-    y_coordinate: number;
+    coordinateX: number;
+    coordinateY: number;
     cameraAngle: number;
     fieldOfView: number;
     vmsLiveFeedUrl: string;

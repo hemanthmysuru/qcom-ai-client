@@ -58,17 +58,17 @@ class AlertConfigService {
     }
 
     public async getSafetyConfigList(cameraId: string): Promise<AlertConfigType[]> {
-        // try {
-        //     const url = validateEndpoint(this.endPoints, this.endPointCategory, 'getSafetyConfigList', { cameraId })
-        //     return await apiService.get(url);
-        // } catch (error) {
-        //     console.error('Error getting safety configuration:', error);
-        //     throw error;
-        // }
+        try {
+            const url = validateEndpoint(this.endPoints, this.endPointCategory, 'getSafetyConfigList', { cameraId })
+            return await apiService.get(url);
+        } catch (error) {
+            console.error('Error getting safety configuration:', error);
+            throw error;
+        }
 
-        // Simulating with a delay and mock data. And network latency
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        return mockAlertConfigList;
+        // // Simulating with a delay and mock data. And network latency
+        // await new Promise((resolve) => setTimeout(resolve, 1000));
+        // return mockAlertConfigList;
     }
 
     public async updateSafetyConfig(safetyConfigId: string, payload: any): Promise<AlertConfigType> {

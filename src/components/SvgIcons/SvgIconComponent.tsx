@@ -4,7 +4,7 @@ export type iconNameTypes = 'analytics' | 'arrowDown' | 'arrowRight' | 'at' | 'b
     | 'location' | 'lock' | 'logoAndName' | 'logo' | 'maximize' | 'minimize' | 'play' | 'plus' | 'proximityAreaRectangle'
     | 'reset' | 'search' | 'sort' | 'user' | 'zoomIn' | 'zoomOut'
     | 'safetyInfractions' | 'ppeNoHardHat' | 'ppeNoSafetyVest' | 'ppeNoMask' | 'fallDetection' | 'proximityToRunningEquipment'
-    | 'footerLogo' | 'pin' | 'arrowDownBlue';
+    | 'footerLogo' | 'pin' | 'arrowDownBlue' | 'surveillanceCamera';
 
 interface IconProps {
     name: iconNameTypes;
@@ -366,6 +366,33 @@ const SvgIcon: React.FC<IconProps> = ({ name, color, width, height }) => {
                                 <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
                                 <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_3786" />
                                 <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_3786" result="shape" />
+                            </filter>
+                        </defs>
+                    </svg>
+
+                )
+            case 'surveillanceCamera':
+                return (
+                    <svg width="47" height="58" viewBox="0 0 47 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_d_110_68281)">
+                            <mask id="path-1-outside-1_110_68281" maskUnits="userSpaceOnUse" x="4.38477" y="0.0967255" width="39" height="50" fill="black">
+                                <rect fill="white" x="4.38477" y="0.0967255" width="39" height="50" />
+                                <path fillRule="evenodd" clipRule="evenodd" d="M28.7275 34.2414C34.9632 32.0481 39.4332 26.1065 39.4332 19.1209C39.4332 10.271 32.2589 3.09673 23.409 3.09673C14.559 3.09673 7.38477 10.271 7.38477 19.1209C7.38477 26.1065 11.8547 32.048 18.0903 34.2413L23.4089 43.4534L28.7275 34.2414Z" />
+                            </mask>
+                            <path fillRule="evenodd" clipRule="evenodd" d="M28.7275 34.2414C34.9632 32.0481 39.4332 26.1065 39.4332 19.1209C39.4332 10.271 32.2589 3.09673 23.409 3.09673C14.559 3.09673 7.38477 10.271 7.38477 19.1209C7.38477 26.1065 11.8547 32.048 18.0903 34.2413L23.4089 43.4534L28.7275 34.2414Z" fill="#F54840" />
+                            <path d="M28.7275 34.2414L27.7321 31.4114L26.6846 31.7798L26.1294 32.7414L28.7275 34.2414ZM18.0903 34.2413L20.6884 32.7413L20.1332 31.7797L19.0857 31.4113L18.0903 34.2413ZM23.4089 43.4534L20.8108 44.9534L23.4089 49.4534L26.007 44.9534L23.4089 43.4534ZM36.4332 19.1209C36.4332 24.794 32.8043 29.6273 27.7321 31.4114L29.7229 37.0714C37.1221 34.4689 42.4332 27.419 42.4332 19.1209H36.4332ZM23.409 6.09673C30.602 6.09673 36.4332 11.9279 36.4332 19.1209H42.4332C42.4332 8.61415 33.9157 0.0967255 23.409 0.0967255V6.09673ZM10.3848 19.1209C10.3848 11.9279 16.2159 6.09673 23.409 6.09673V0.0967255C12.9022 0.0967255 4.38477 8.61415 4.38477 19.1209H10.3848ZM19.0857 31.4113C14.0135 29.6272 10.3848 24.794 10.3848 19.1209H4.38477C4.38477 27.4189 9.69579 34.4688 17.0948 37.0714L19.0857 31.4113ZM26.007 41.9534L20.6884 32.7413L15.4922 35.7413L20.8108 44.9534L26.007 41.9534ZM26.1294 32.7414L20.8108 41.9534L26.007 44.9534L31.3256 35.7414L26.1294 32.7414Z" fill="white" mask="url(#path-1-outside-1_110_68281)" />
+                            <path d="M34.2262 15.3568C34.0549 15.1558 33.7915 15.0579 33.5305 15.098L30.8186 15.5145L30.9856 14.9954C31.1145 14.5947 30.8942 14.1653 30.4935 14.0364L19.3676 10.457C18.9669 10.3281 18.5375 10.5485 18.4086 10.9492L17.8138 12.798L16.5411 16.754C16.4122 17.1547 16.6325 17.5841 17.0332 17.713L19.3348 18.4535C19.3468 18.8586 19.4671 19.2495 19.6756 19.588L17.7838 21.958L16.1079 21.4188L16.5748 19.9676C16.7037 19.5669 16.4834 19.1375 16.0826 19.0086L13.1802 18.0749C12.7795 17.9459 12.3501 18.1663 12.2212 18.567L10.8206 22.9206C10.6917 23.3214 10.912 23.7508 11.3127 23.8797L14.2151 24.8134C14.6159 24.9423 15.0453 24.722 15.1742 24.3212L15.6411 22.87L17.8179 23.5704C18.1194 23.6674 18.4494 23.5678 18.647 23.3202L20.8625 20.5447C20.8816 20.5514 20.9005 20.5585 20.92 20.5648C21.8659 20.8691 22.8676 20.5219 23.4389 19.7738L28.1591 21.2923C28.5598 21.4212 28.9892 21.2009 29.1182 20.8002L29.2851 20.2811L31.2454 22.2007C31.3313 22.2849 31.4343 22.346 31.5452 22.3817C31.6778 22.4244 31.8219 22.4306 31.9615 22.3961C32.218 22.3327 32.4234 22.141 32.5042 21.8895L34.3717 16.0848C34.4527 15.8333 34.3976 15.5579 34.2262 15.3568ZM12.5052 22.6619L13.439 19.7595L14.8902 20.2264L13.9564 23.1288L12.5052 22.6619ZM31.4308 20.2487L29.8071 18.6587L30.2967 17.1369L32.5428 16.792L31.4308 20.2487ZM18.2257 16.4953L18.6926 15.0441L28.3673 18.1565L27.9004 19.6077L18.2257 16.4953ZM19.6263 12.1417L29.301 15.2541L28.8341 16.7053L19.1594 13.5929L19.6263 12.1417Z" fill="white" />
+                        </g>
+                        <defs>
+                            <filter id="filter0_d_110_68281" x="0.384766" y="0.0967255" width="46.0488" height="57.3567" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                <feOffset dy="4" />
+                                <feGaussianBlur stdDeviation="2" />
+                                <feComposite in2="hardAlpha" operator="out" />
+                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_110_68281" />
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_110_68281" result="shape" />
                             </filter>
                         </defs>
                     </svg>

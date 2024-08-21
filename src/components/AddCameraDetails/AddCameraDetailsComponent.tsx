@@ -13,8 +13,8 @@ export type FormFieldsType = {
     cameraName: string;
     rtspUrl: string;
     location: string;
-    xCoordinate: string;
-    yCoordinate: string;
+    coordinateX: string;
+    coordinateY: string;
     cameraAngle: number;
     fieldOfView: number;
 };
@@ -29,11 +29,13 @@ const AddCameraDetails: React.FC<IAddCameraDetails> = ({ onFormChange }) => {
         cameraName: '',
         rtspUrl: '',
         location: '',
-        xCoordinate: '',
-        yCoordinate: '',
+        coordinateX: '',
+        coordinateY: '',
         cameraAngle: 0,
         fieldOfView: 0,
     });
+
+    const [isFormValid, setIsFormValid] = useState<boolean>(false);
 
     // Debounced function for handling form change
     const debouncedOnFormChange = useCallback(
@@ -66,13 +68,32 @@ const AddCameraDetails: React.FC<IAddCameraDetails> = ({ onFormChange }) => {
         setFormData(prevState => {
             const updatedFormData = {
                 ...prevState,
-                xCoordinate: x.toFixed(2),
-                yCoordinate: y.toFixed(2),
+                coordinateX: x.toFixed(2),
+                coordinateY: y.toFixed(2),
             };
             debouncedOnFormChange(updatedFormData);
             return updatedFormData;
         });
     };
+
+    const validateForm = () => {
+        const { cameraId, cameraName, rtspUrl, location, coordinateX, coordinateY, cameraAngle, fieldOfView } = formData;
+        return (
+            cameraId.trim() !== '' &&
+            cameraName.trim() !== '' &&
+            rtspUrl.trim() !== '' &&
+            location.trim() !== '' &&
+            coordinateX.trim() !== '' &&
+            coordinateY.trim() !== '' &&
+            cameraAngle >= 0 && cameraAngle <= 360 &&
+            fieldOfView >= 0 && fieldOfView <= 360
+        );
+    };
+
+    useEffect(() => {
+        setIsFormValid(validateForm());
+        console.log(isFormValid, formData);
+    }, [formData]);
 
     // Render a single input block
     const inputBlockRenderer = (
@@ -119,8 +140,8 @@ const AddCameraDetails: React.FC<IAddCameraDetails> = ({ onFormChange }) => {
         setFormData(prevState => {
             const updatedFormData = {
                 ...prevState,
-                xCoordinate: position.x,
-                yCoordinate: position.y,
+                coordinateX: position.x,
+                coordinateY: position.y,
             };
             debouncedOnFormChange(updatedFormData);
             return updatedFormData;
@@ -152,7 +173,7 @@ const AddCameraDetails: React.FC<IAddCameraDetails> = ({ onFormChange }) => {
         ),
         cameraAngle: formData.cameraAngle,
         fieldOfView: formData.fieldOfView
-        // ), position: { x: (selectedCamera?.x_coordinate || 0)?.toString(), y: (selectedCamera?.y_coordinate || 0)?.toString() }
+        // ), position: { x: (selectedCamera?.coordinateX || 0)?.toString(), y: (selectedCamera?.coordinateY || 0)?.toString() }
     }
 
 
@@ -169,10 +190,10 @@ const AddCameraDetails: React.FC<IAddCameraDetails> = ({ onFormChange }) => {
                         {inputBlockRenderer('Camera Location', 'text', true, 'Enter camera location', false, 'location')}
                         <div className="row">
                             <section className="column">
-                                {inputBlockRenderer('x-coordinate', 'text', true, 'x-coordinate', true, 'xCoordinate')}
+                                {inputBlockRenderer('x-coordinate', 'text', true, 'x-coordinate', true, 'coordinateX')}
                             </section>
                             <section className="column">
-                                {inputBlockRenderer('y-coordinate', 'text', true, 'y-coordinate', true, 'yCoordinate')}
+                                {inputBlockRenderer('y-coordinate', 'text', true, 'y-coordinate', true, 'coordinateY')}
                             </section>
                         </div>
                         <p>*Click on the map for entering camera location</p>

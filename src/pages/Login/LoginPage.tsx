@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import footerImg from "../../assets/svgs/login-footer-logo.svg";
-import CustomButton from "../../components/CustomButton/CustomButtonComponent";
 import SvgIcon from "../../components/SvgIcons/SvgIconComponent";
 import { useAuth } from "../../context/AuthContext";
 import './LoginPage.scss';
+import CustomButton from "../../components/CustomButton/CustomButtonComponent";
 
 const autoFeedLoginCreds = {
     emailId: 'admin@email.com',

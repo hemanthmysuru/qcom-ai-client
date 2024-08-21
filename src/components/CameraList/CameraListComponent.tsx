@@ -1,4 +1,3 @@
-import CustomButton from '../CustomButton/CustomButtonComponent';
 import RippleEffect from '../RippleEffect/RippleEffect';
 import SvgIcon from '../SvgIcons/SvgIconComponent';
 import './CameraListComponent.scss';
@@ -8,6 +7,7 @@ import useCustomDialogHandler from '../CustomDialog/useCustomDialogHandler';
 import { useEffect, useState } from 'react';
 import AddCameraDetails, { FormFieldsType } from '../AddCameraDetails/AddCameraDetailsComponent';
 import { CameraConfigType } from '../../sdk/types/cameraConfig.type';
+import CustomButton from '../CustomButton/CustomButtonComponent';
 
 // interface ICameraDetails {
 //     id: number;
@@ -18,19 +18,21 @@ interface ICameraList {
     selectedCamera: CameraConfigType | null;
     updateSelectedCamera: (selected: CameraConfigType) => void;
     addCamera: (cameraFormData: FormFieldsType) => void
+    deleteCamera: (id: string) => void
 }
 
 interface IDialogProps {
     title: string;
     content: JSX.Element;
     dialogMaxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    isSaveDisabled?: boolean;
     cancelText: string;
     saveText: string;
     onSave: () => void;
     onCancel: () => void;
 }
 
-const CameraList: React.FC<ICameraList> = ({ list, selectedCamera, updateSelectedCamera, addCamera }) => {
+const CameraList: React.FC<ICameraList> = ({ list, selectedCamera, updateSelectedCamera, addCamera, deleteCamera }) => {
     const { openDialog, handleOpenDialog, handleCloseDialog, handleCancelDialog, handleSaveDialog } = useCustomDialogHandler();
     const [cameraToDelete, setCameraToDelete] = useState<CameraConfigType | null>(null);
     const [dialogProps, setDialogProps] = useState<IDialogProps | null>(null);
@@ -50,6 +52,9 @@ const CameraList: React.FC<ICameraList> = ({ list, selectedCamera, updateSelecte
             cancelText: 'Cancel',
             saveText: 'Delete',
             onSave: () => {
+                if (data?.id) {
+                    deleteCamera(data?.id);
+                }
                 handleDialogDeleteCameraClick();
             },
             onCancel: () => {
@@ -65,6 +70,7 @@ const CameraList: React.FC<ICameraList> = ({ list, selectedCamera, updateSelecte
             title: 'Add camera',
             content: addCameraDialogContent,
             dialogMaxWidth: 'lg',
+            isSaveDisabled: false,
             cancelText: 'Cancel',
             saveText: 'Save',
             onSave: () => {
@@ -117,6 +123,7 @@ const CameraList: React.FC<ICameraList> = ({ list, selectedCamera, updateSelecte
                 dialogMaxWidth={dialogProps?.dialogMaxWidth || 'md'}
                 cancelText={dialogProps.cancelText}
                 saveText={dialogProps.saveText}
+                isSaveDisabled={false}
                 onClose={handleCloseDialog}
                 onCancel={dialogProps.onCancel}
                 onSave={dialogProps.onSave}
@@ -148,7 +155,7 @@ const CameraList: React.FC<ICameraList> = ({ list, selectedCamera, updateSelecte
                                 {
                                     list.map((cam: CameraConfigType, index: number) => (
                                         <RippleEffect as="li" key={cam.id} className={`item ripple-list-item ${selectedCamera?.id === cam?.id ? 'selected' : ''}`} onClick={() => handleListItemClick(cam)}>
-                                            <label>{cam.cameraId}</label>
+                                            <label title={cam.cameraId}>{cam.cameraName}</label>
                                             <CustomButton icon={<SvgIcon name='delete' width={16} height={16} />} variant='outlined' onClick={() => handleListItemDeleteBtnClick(cam)} />
                                         </RippleEffect>
                                     ))

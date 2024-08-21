@@ -20,10 +20,13 @@ const cameraSlice = createSlice({
         },
         addCamera: (state, action: PayloadAction<CameraConfigType>) => {
             state.cameraList.push(action.payload);
+        },
+        deleteCamera: (state, action: PayloadAction<string>) => {
+            state.cameraList = state.cameraList.filter(camera => camera.id != action.payload);
         }
     },
 });
 
-export const { setCameraList, addCamera } = cameraSlice.actions;
+export const { setCameraList, addCamera, deleteCamera } = cameraSlice.actions;
 
 export default cameraSlice.reducer;

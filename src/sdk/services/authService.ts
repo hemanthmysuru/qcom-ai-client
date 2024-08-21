@@ -33,7 +33,7 @@ class AuthService {
         // await new Promise((resolve) => setTimeout(resolve, 1000));
 
         // // Check if username and password match the mock data
-        // if (emailId === 'admin' && password === 'admin') {
+        // if (emailId === 'admin@email.com' && password === 'smart123') {
         //     return mockUser;
         // } else {
         //     throw new Error('Invalid credentials');

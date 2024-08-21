@@ -4,7 +4,6 @@ import './ConfigActionComponent.scss';
 // import floorPlanImage from '../../assets/images/floor-plan.png';
 import floorPlanImage from '../../assets/svgs/floor-plan.svg';
 import ImageWithDraggableIcon from '../ImageWithDraggableIcon/ImageWithDraggableIconComponent';
-import CustomButton from '../CustomButton/CustomButtonComponent';
 import floorHotspotImage from '../../assets/images/floor-hotspot1.png';
 import ZoomableCanvas from '../zoomableCanvas/ZoomableCanvasComponent';
 import ZoomablePage from '../zoomable/ZoomablePage';
@@ -14,13 +13,16 @@ import RippleEffect from '../RippleEffect/RippleEffect';
 import { useEffect, useState } from 'react';
 import { AlertConfigType } from '../../sdk/types/alertConfig.type';
 import alertConfigService from '../../sdk/services/alertConfigService';
+import SurveillanceCamera from '../SurveillanceCamera/SurveillanceCameraComponent';
+import CustomButton from '../CustomButton/CustomButtonComponent';
+import { scaleToPercentage } from '../../utils/common.util';
 
 const listOptions = [
-    { label: 'PPE - No hard hat', options: [] },
-    { label: 'PPE - No safety vest', options: [] },
-    { label: 'PPE - No safety goggles', options: [] },
-    { label: 'PPE - No safety gloves', options: [] },
-    { label: 'PPE - No mask', options: [] },
+    { id: 1, alertName: 'PPE - No hard hat', options: ['Severity Level 1'], enabled: false, selected: 'Severity Level 1' },
+    { id: 2, alertName: 'PPE - No safety vest', options: ['Severity Level 1'], enabled: true, selected: 'Severity Level 1' },
+    { id: 3, alertName: 'PPE - No safety goggles', options: ['Severity Level 1'], enabled: false, selected: 'Severity Level 1' },
+    { id: 4, alertName: 'PPE - No safety gloves', options: ['Severity Level 1'], enabled: true, selected: 'Severity Level 1' },
+    { id: 5, alertName: 'PPE - No mask', options: ['Severity Level 1'], enabled: true, selected: 'Severity Level 1' },
 ]
 
 interface IConfigActionProps {
@@ -50,18 +52,26 @@ const ConfigAction: React.FC<IConfigActionProps> = ({ selectedCamera }) => {
         fetchSafetyConfigList();
     }, [selectedCamera]);
 
-    const dynamicComponents = [
-        {
-            component: (
-                <CameraView
-                    cameraAngle={selectedCamera?.cameraAngle || 0}
-                    fieldOfView={selectedCamera?.fieldOfView || 0}
-                    showPin={false}
-                />
-            ), position: { x: '30%', y: '50%' }
-            // ), position: { x: (selectedCamera?.x_coordinate || 0)?.toString(), y: (selectedCamera?.y_coordinate || 0)?.toString() }
-        },
-    ];
+    const dynamicComponents = () => {
+        const { coordinateX, coordinateY } = selectedCamera || {} as CameraConfigType;
+        const x = scaleToPercentage(coordinateX);
+        const y = scaleToPercentage(coordinateY);
+        return [
+            {
+                component: (
+                    // <CameraView
+                    //     svgIconName='surveillanceCamera'
+                    //     cameraAngle={selectedCamera?.cameraAngle || 0}
+                    //     fieldOfView={selectedCamera?.fieldOfView || 0}
+                    //     showPin={false}
+                    // />
+                    <SurveillanceCamera />
+                    // ), position: { x: '30%', y: '50%' }
+                ), position: { x, y }
+                // ), position: { x: (selectedCamera?.x_coordinate || 0)?.toString(), y: (selectedCamera?.y_coordinate || 0)?.toString() }
+            },
+        ]
+    }
 
     const cameraZoneRenderer = (
         <aside className="camera-location">
@@ -85,7 +95,7 @@ const ConfigAction: React.FC<IConfigActionProps> = ({ selectedCamera }) => {
                         ]}
                     /> */}
                 <ZoomablePage
-                    components={dynamicComponents}
+                    components={dynamicComponents()}
                     showZoomControls={false}
                     isImageDraggable={false}
                     isCamCreationAllowed={false} />
@@ -132,7 +142,7 @@ const ConfigAction: React.FC<IConfigActionProps> = ({ selectedCamera }) => {
     const modifyAlertRenderer = (
         <ul className="selection-list">
             {
-                safetyConfigList?.map((config: AlertConfigType, index: number) => (
+                listOptions?.map((config: any, index: number) => (
                     <li key={index}>
 
                         <article>
@@ -140,8 +150,8 @@ const ConfigAction: React.FC<IConfigActionProps> = ({ selectedCamera }) => {
                             <span>{config.alertName}</span>
                         </article>
                         <CustomSelect
-                            options={[config.severity]}
-                            selectedOption={config.severity}
+                            options={config.options}
+                            selectedOption={config.selected}
                             placeholder={'Select security level'}
                             onChange={(option: string): void => {
                                 console.log(option)
@@ -174,9 +184,9 @@ const ConfigAction: React.FC<IConfigActionProps> = ({ selectedCamera }) => {
                 ) : (
                     <section className="no-camera-selected">
                         <p>No camera selected</p>
-                        <RippleEffect as="div">
+                        {/* <RippleEffect as="div">
                             <CustomButton text='Add camera' variant='contained' onClick={() => console.log('add camera')} />
-                        </RippleEffect>
+                        </RippleEffect> */}
                     </section>
                 )
             }

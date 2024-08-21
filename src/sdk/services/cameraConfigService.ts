@@ -8,8 +8,8 @@ const fieldNameList = {
     cameraId: 'cameraId',
     cameraName: 'cameraName',
     location: 'location',
-    xCoordinate: 'x_coordinate',
-    yCoordinate: 'y_coordinate',
+    coordinateX: 'coordinateX',
+    coordinateY: 'coordinateY',
     cameraAngle: 'cameraAngle',
     fieldOfView: 'fieldOfView',
     vmsLiveFeedUrl: 'vmsLiveFeedUrl',
@@ -21,12 +21,12 @@ const fieldNameList = {
 
 const mockCameraList: CameraConfigType[] = [
     {
-        "id": 6,
+        "id": '6',
         "cameraName": "moveable",
         "cameraId": "camera0200",
         "location": "detectionZone",
-        "x_coordinate": 10,
-        "y_coordinate": 10,
+        "coordinateX": 10,
+        "coordinateY": 10,
         "cameraAngle": 90,
         "fieldOfView": 180,
         "vmsLiveFeedUrl": "http://videocamera13.vid",
@@ -37,12 +37,12 @@ const mockCameraList: CameraConfigType[] = [
         "lastModifiedDate": 1722684018285
     },
     {
-        "id": 7,
+        "id": '7',
         "cameraName": "moveable",
         "cameraId": "camera0201",
         "location": "detectionZone",
-        "x_coordinate": 10,
-        "y_coordinate": 10,
+        "coordinateX": 10,
+        "coordinateY": 10,
         "cameraAngle": 90,
         "fieldOfView": 180,
         "vmsLiveFeedUrl": "http://videocamera13.vid",
@@ -97,7 +97,7 @@ class CameraConfigService {
         }
 
         // await new Promise((resolve) => setTimeout(resolve, 1000));
-        // return mockCameraList.find((cam: CameraConfigType) => cam?.id == parseInt(id)) || {} as CameraConfigType;
+        // return mockCameraList.find((cam: CameraConfigType) => cam?.id == id) || {} as CameraConfigType;
     }
 
     public async deleteCameraById(id: string): Promise<void> {

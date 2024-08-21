@@ -1,4 +1,5 @@
 import CustomButton from '../CustomButton/CustomButtonComponent';
+import SvgIcon from '../SvgIcons/SvgIconComponent';
 import './AlertBoxComponent.scss';
 
 interface IProps {
@@ -48,16 +49,14 @@ const AlertBox: React.FC<IProps> = ({ headerLabel = '', subHeaderLabel = '', sub
 
                 <div className="left-actions">
                     <CustomButton
-                        icon="call"
                         variant="contained"
                         btnType='success'
-                        sx={{ height: '28px', width: '28px' }}
+                        icon={<SvgIcon name='reset' width={16} height={16} />}
                     />
                     <CustomButton
-                        icon="close"
                         variant="contained"
                         btnType='error'
-                        sx={{ height: '28px', width: '28px' }}
+                        icon={<SvgIcon name='close' width={16} height={16} />}
                     />
                 </div>
 
@@ -67,7 +66,6 @@ const AlertBox: React.FC<IProps> = ({ headerLabel = '', subHeaderLabel = '', sub
                             <CustomButton
                                 text="View details"
                                 variant="contained"
-                                sx={{ height: '28px', fontSize: '1.2rem' }}
                                 onClick={onAlertViewDetailsClick}
                             />
                         </aside>

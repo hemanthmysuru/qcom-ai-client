@@ -110,6 +110,7 @@ class CameraConfigService {
         }
     }
 
+
     // To test the multiple id replacement
     // public async getCameraByIdAndAlertId(cameraId: string, alertId: string): Promise<CameraConfigType> {
     //     try {

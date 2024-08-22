@@ -14,8 +14,10 @@ import { useEffect, useState } from 'react';
 import { AlertConfigType } from '../../sdk/types/alertConfig.type';
 import alertConfigService from '../../sdk/services/alertConfigService';
 import SurveillanceCamera from '../SurveillanceCamera/SurveillanceCameraComponent';
-import CustomButton from '../CustomButton/CustomButtonComponent';
 import { scaleToPercentage } from '../../utils/common.util';
+import customAlertConfigService from '../../sdk/services/customAlertConfigService';
+import { CustomAlertConfigType } from '../../sdk/types/customAlertConfig.type';
+import CustomAlertConfig from '../CustomAlertConfig/CustomAlertConfigComponent';
 
 const listOptions = [
     { id: 1, alertName: 'PPE - No hard hat', options: ['Severity Level 1'], enabled: false, selected: 'Severity Level 1' },
@@ -30,15 +32,14 @@ interface IConfigActionProps {
 }
 
 const ConfigAction: React.FC<IConfigActionProps> = ({ selectedCamera }) => {
-
     const [safetyConfigList, setSafetyConfigList] = useState<AlertConfigType[]>([]);
 
     useEffect(() => {
         console.log(selectedCamera);
         const fetchSafetyConfigList = async () => {
             try {
-                if (selectedCamera?.cameraId) {
-                    const list: AlertConfigType[] = await alertConfigService.getSafetyConfigList(selectedCamera?.cameraId);
+                if (selectedCamera?.id) {
+                    const list: AlertConfigType[] = await alertConfigService.getSafetyConfigList(selectedCamera?.id);
                     // const list: CameraConfigType[] = mockCameraList;
                     // setSelectedCamera(list[0] || null);
                     setSafetyConfigList(list);
@@ -103,42 +104,6 @@ const ConfigAction: React.FC<IConfigActionProps> = ({ selectedCamera }) => {
         </aside>
     );
 
-    const customAlertRenderer = (
-        <>
-            <section className="cam-view">
-                <header className='alert-action-header'>
-                    <article>
-                        <CustomCheckbox />
-                        <span>Custom Alerts - Detection Zone </span>
-                    </article>
-
-                    <CustomButton text='Create Proximity Area' />
-                </header>
-
-                <figure>
-                    <img src={floorHotspotImage} alt="" />
-                </figure>
-            </section>
-
-            <aside className="alert-details">
-                <header>Alert details</header>
-                <div className="input-block">
-                    <label>Alert name</label>
-                    <input type="text" name="" placeholder="Enter alert name" />
-                </div>
-                <div className="input-block">
-                    <label>Severity level</label>
-                    <CustomSelect
-                        options={[]}
-                        placeholder={'Select security level'}
-                        selectedOption={''} onChange={(option: string): void => {
-                            console.log(option)
-                        }} />
-                </div>
-            </aside>
-        </>
-    );
-
     const modifyAlertRenderer = (
         <ul className="selection-list">
             {
@@ -164,7 +129,6 @@ const ConfigAction: React.FC<IConfigActionProps> = ({ selectedCamera }) => {
 
     return (
         <section className="config-action">
-
             {
                 selectedCamera?.id ? (
                     <>
@@ -177,9 +141,7 @@ const ConfigAction: React.FC<IConfigActionProps> = ({ selectedCamera }) => {
                             {cameraZoneRenderer}
                         </article>
 
-                        <footer className="custom-alert-block">
-                            {customAlertRenderer}
-                        </footer>
+                        <CustomAlertConfig selectedCamera={selectedCamera} />
                     </>
                 ) : (
                     <section className="no-camera-selected">
@@ -190,8 +152,6 @@ const ConfigAction: React.FC<IConfigActionProps> = ({ selectedCamera }) => {
                     </section>
                 )
             }
-
-
         </section >
     );
 }

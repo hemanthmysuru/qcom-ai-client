@@ -3,7 +3,7 @@ import SvgIcon from '../SvgIcons/SvgIconComponent';
 import './CameraListComponent.scss';
 import floorPlan from '../../assets/images/floor-plan.png';
 import CustomDialog from '../CustomDialog/CustomDialogComponent';
-import useCustomDialogHandler from '../CustomDialog/useCustomDialogHandler';
+import useCustomDialogHandler, { IDialogProps } from '../CustomDialog/useCustomDialogHandler';
 import { useEffect, useState } from 'react';
 import AddCameraDetails, { FormFieldsType } from '../AddCameraDetails/AddCameraDetailsComponent';
 import { CameraConfigType } from '../../sdk/types/cameraConfig.type';
@@ -19,17 +19,6 @@ interface ICameraList {
     updateSelectedCamera: (selected: CameraConfigType) => void;
     addCamera: (cameraFormData: FormFieldsType) => void
     deleteCamera: (id: string) => void
-}
-
-interface IDialogProps {
-    title: string;
-    content: JSX.Element;
-    dialogMaxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-    isSaveDisabled?: boolean;
-    cancelText: string;
-    saveText: string;
-    onSave: () => void;
-    onCancel: () => void;
 }
 
 const CameraList: React.FC<ICameraList> = ({ list, selectedCamera, updateSelectedCamera, addCamera, deleteCamera }) => {
@@ -74,7 +63,7 @@ const CameraList: React.FC<ICameraList> = ({ list, selectedCamera, updateSelecte
             cancelText: 'Cancel',
             saveText: 'Save',
             onSave: () => {
-                handleAddCamera()
+                handleAddCamera();
                 handleCloseDialog();
             },
             onCancel: () => {

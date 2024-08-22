@@ -1,5 +1,16 @@
 import { useState } from "react";
 
+export interface IDialogProps {
+    title: string;
+    content: JSX.Element;
+    dialogMaxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    isSaveDisabled?: boolean;
+    cancelText: string;
+    saveText: string;
+    onSave: () => void;
+    onCancel: () => void;
+}
+
 // Define a custom hook for dialog handling
 const useCustomDialogHandler = () => {
     const [openDialog, setOpenDialog] = useState<boolean>(false);

@@ -64,17 +64,17 @@ const AddCameraDetails: React.FC<IAddCameraDetails> = ({ onFormChange }) => {
     };
 
     // Handle changes in icon position
-    const handleIconPositionChange = (x: number, y: number) => {
-        setFormData(prevState => {
-            const updatedFormData = {
-                ...prevState,
-                coordinateX: x.toFixed(2),
-                coordinateY: y.toFixed(2),
-            };
-            debouncedOnFormChange(updatedFormData);
-            return updatedFormData;
-        });
-    };
+    // const handleIconPositionChange = (x: number, y: number) => {
+    //     setFormData(prevState => {
+    //         const updatedFormData = {
+    //             ...prevState,
+    //             coordinateX: x.toFixed(2),
+    //             coordinateY: y.toFixed(2),
+    //         };
+    //         debouncedOnFormChange(updatedFormData);
+    //         return updatedFormData;
+    //     });
+    // };
 
     const validateForm = () => {
         const { cameraId, cameraName, rtspUrl, location, coordinateX, coordinateY, cameraAngle, fieldOfView } = formData;

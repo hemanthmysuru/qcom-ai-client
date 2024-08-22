@@ -6,16 +6,19 @@ interface CustomSelectProps {
     options: string[];
     selectedOption: string;
     onChange: (option: string) => void;
-    placeholder?: string; // Added placeholder prop
+    placeholder?: string;
+    disabled?: boolean; // Added disabled prop
 }
 
-const CustomSelect: React.FC<CustomSelectProps> = ({ options, selectedOption, onChange, placeholder }) => {
+const CustomSelect: React.FC<CustomSelectProps> = ({ options, selectedOption, onChange, placeholder, disabled }) => {
     const [isOpen, setIsOpen] = useState(false);
     const selectRef = useRef<HTMLDivElement>(null);
 
     const handleSelect = (option: string) => {
-        onChange(option);
-        setIsOpen(false);
+        if (!disabled) {
+            onChange(option);
+            setIsOpen(false);
+        }
     };
 
     const handleClickOutside = (event: MouseEvent) => {
@@ -32,14 +35,18 @@ const CustomSelect: React.FC<CustomSelectProps> = ({ options, selectedOption, on
     }, []);
 
     return (
-        <div className="custom-select" ref={selectRef}>
-            <div className="custom-select__header" onClick={() => setIsOpen(!isOpen)}>
+        <div className={`custom-select ${disabled ? 'disabled' : ''}`} ref={selectRef}>
+            <div
+                className="custom-select__header"
+                onClick={() => !disabled && setIsOpen(!isOpen)}
+                aria-disabled={disabled}
+            >
                 <span>{selectedOption || placeholder || 'Select an option'}</span>
                 <div className={`custom-select__arrow ${isOpen ? 'open' : ''}`}>
                     <SvgIcon name='arrowDownBlue' width={16} height={16} />
                 </div>
             </div>
-            {isOpen && (
+            {isOpen && !disabled && (
                 <div className="custom-select__options">
                     {options.map(option => (
                         <div

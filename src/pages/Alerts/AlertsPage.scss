@@ -1,3 +1,6 @@
+@import "../../styles/main.scss";
+@import "../../styles/mixins";
+
 // .alerts-page {
 //     height: 100%;
 // }
@@ -24,5 +27,22 @@
             bottom: 112%;
             left: -50%;
         }
+    }
+}
+
+.dialog-content {
+    @include flex-row();
+    align-items: flex-start;
+    height: 100%;
+    overflow: hidden;
+
+    .side-content {
+        width: 340px;
+        overflow-y: auto;
+    }
+
+    .main-content {
+        width: calc(100% - 340px);
+        color: white;
     }
 }

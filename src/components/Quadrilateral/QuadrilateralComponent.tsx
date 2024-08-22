@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
+import { isNullishCoalesce } from 'typescript';
 
 const MediaContainer = styled.div<{ cursor: string }>`
   position: relative;
@@ -54,30 +55,40 @@ const FilledQuadrilateral = styled.div<{ points: { x: number; y: number }[] }>`
   pointer-events: none;
 `;
 
+export const defaultCoordinateList = [
+    { x: 100, y: 100 },
+    { x: 300, y: 100 },
+    { x: 300, y: 300 },
+    { x: 100, y: 300 }
+];
+
 interface QuadrilateralProps {
     mediaType: 'image' | 'video';
     mediaSrc: string;
-    defaultCoordinates?: { x: number; y: number }[];
-    onCoordinatesChange: (points: { x: number; y: number }[]) => void;
+    defaultCoordinates?: { x: number; y: number }[] | null;
+    onCoordinatesChange?: (points: { x: number; y: number }[]) => void;
     pointsVisible: boolean;
+    showLinesAndFill?: boolean;
 }
 
 const Quadrilateral: React.FC<QuadrilateralProps> = ({
     mediaType,
     mediaSrc,
-    defaultCoordinates = [
-        { x: 100, y: 100 },
-        { x: 300, y: 100 },
-        { x: 300, y: 300 },
-        { x: 100, y: 300 },
-    ],
+    defaultCoordinates = null,
     onCoordinatesChange,
     pointsVisible,
+    showLinesAndFill = true
 }) => {
     const [points, setPoints] = useState(defaultCoordinates);
     const [draggingIndex, setDraggingIndex] = useState<number | null>(null);
     const [cursor, setCursor] = useState('default');
     const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (defaultCoordinates != null) {
+            setPoints(defaultCoordinates);
+        }
+    }, [defaultCoordinates]);
 
     const handleMouseMove = useCallback(
         (event: MouseEvent) => {
@@ -90,7 +101,7 @@ const Quadrilateral: React.FC<QuadrilateralProps> = ({
                 const clampedY = Math.max(0, Math.min(y, containerRect.height));
 
                 setPoints((prevPoints) => {
-                    const newPoints = [...prevPoints];
+                    const newPoints = (prevPoints !== null) ? [...prevPoints] : [];
                     newPoints[draggingIndex] = { x: clampedX, y: clampedY };
                     return newPoints;
                 });
@@ -103,7 +114,9 @@ const Quadrilateral: React.FC<QuadrilateralProps> = ({
         if (draggingIndex !== null && pointsVisible) {
             setDraggingIndex(null);
             setCursor('default');
-            onCoordinatesChange(points);
+            if (onCoordinatesChange && points?.length) {
+                onCoordinatesChange(points);
+            }
         }
     }, [draggingIndex, points, pointsVisible, onCoordinatesChange]);
 
@@ -143,7 +156,7 @@ const Quadrilateral: React.FC<QuadrilateralProps> = ({
             ) : (
                 <MediaElement style={{ backgroundImage: `url(${mediaSrc})` }} />
             )}
-            {pointsVisible &&
+            {pointsVisible && points?.length &&
                 points.map((point, index) => (
                     <Point
                         key={index}
@@ -155,12 +168,19 @@ const Quadrilateral: React.FC<QuadrilateralProps> = ({
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
                     />
-                ))}
-            <FilledQuadrilateral points={points} />
-            <Line x1={points[0].x} y1={points[0].y} x2={points[1].x} y2={points[1].y} />
-            <Line x1={points[1].x} y1={points[1].y} x2={points[2].x} y2={points[2].y} />
-            <Line x1={points[2].x} y1={points[2].y} x2={points[3].x} y2={points[3].y} />
-            <Line x1={points[3].x} y1={points[3].y} x2={points[0].x} y2={points[0].y} />
+                ))
+            }
+            {
+                showLinesAndFill && points?.length && (
+                    <>
+                        <FilledQuadrilateral points={points} />
+                        <Line x1={points[0].x} y1={points[0].y} x2={points[1].x} y2={points[1].y} />
+                        <Line x1={points[1].x} y1={points[1].y} x2={points[2].x} y2={points[2].y} />
+                        <Line x1={points[2].x} y1={points[2].y} x2={points[3].x} y2={points[3].y} />
+                        <Line x1={points[3].x} y1={points[3].y} x2={points[0].x} y2={points[0].y} />
+                    </>
+                )
+            }
         </MediaContainer>
     );
 };

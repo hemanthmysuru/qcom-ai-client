@@ -9,11 +9,31 @@ $select-selected-bg-color: #3253dc; // Blue background for selected option
 $select-header-color: #464646;
 $select-height: 38px;
 $select-padding: 16px 8px 16px 16px;
+$disabled-bg-color: #f0f0f0;
+$disabled-border-color: #cccccc;
+$disabled-text-color: #999999;
 
 .custom-select {
     position: relative;
     display: inline-block;
     width: 200px; // Adjust width as needed
+
+    &.disabled {
+        cursor: not-allowed;
+
+        .custom-select__header {
+            background-color: $disabled-bg-color;
+            border-color: $disabled-border-color;
+            color: $disabled-text-color;
+        }
+
+        .custom-select__arrow {
+            svg path {
+                // fill: $disabled-text-color;
+                stroke: $disabled-text-color;
+            }
+        }
+    }
 
     .custom-select__header {
         display: flex;

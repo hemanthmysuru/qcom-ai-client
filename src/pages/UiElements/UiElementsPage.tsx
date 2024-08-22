@@ -1,5 +1,4 @@
 import { useState } from "react";
-import CustomButton from "../../components/CustomButton/CustomButtonComponent";
 import CustomDialog from "../../components/CustomDialog/CustomDialogComponent";
 import AlertBox from "../../components/AlertBox/AlertBoxComponent";
 import { Notifications } from "@mui/icons-material";
@@ -15,6 +14,7 @@ import floorHotspotVideo from '../../assets/videos/floor-hotspot1.mp4';
 import useCustomDialogHandler from "../../components/CustomDialog/useCustomDialogHandler";
 import CustomCheckbox from "../../components/CustomCheckbox/CustomCheckboxComponent";
 import CustomSelect from "../../components/CustomSelect/CustomSelectComponent";
+import CustomButton from "../../components/CustomButton/CustomButtonComponent";
 
 const eventCounterList: IEventCounter[] = [
     { count: 54, icon: 'safetyInfractions', name: 'Safety Infraction' },

@@ -4,9 +4,10 @@ import './CustomCheckboxComponent.scss';
 interface CustomCheckboxProps {
     checked?: boolean; // Make this optional for default value
     onChange?: (checked: boolean) => void;
+    disabled?: boolean;
 }
 
-const CustomCheckbox: React.FC<CustomCheckboxProps> = ({ checked = false, onChange }) => {
+const CustomCheckbox: React.FC<CustomCheckboxProps> = ({ checked = false, onChange, disabled = false }) => {
     const [isChecked, setIsChecked] = useState<boolean>(checked);
 
     useEffect(() => {
@@ -14,19 +15,22 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({ checked = false, onChan
     }, [checked]);
 
     const handleChange = () => {
-        const newChecked = !isChecked;
-        setIsChecked(newChecked);
-        if (onChange) {
-            onChange(newChecked);
+        if (!disabled) {
+            const newChecked = !isChecked;
+            setIsChecked(newChecked);
+            if (onChange) {
+                onChange(newChecked);
+            }
         }
     };
 
     return (
-        <label className="checkbox-container">
+        <label className={`checkbox-container ${disabled ? 'disabled' : ''}`}>
             <input
                 type="checkbox"
                 checked={isChecked}
                 onChange={handleChange}
+                disabled={disabled}
                 readOnly
             />
             <span className="custom-checkbox"></span>

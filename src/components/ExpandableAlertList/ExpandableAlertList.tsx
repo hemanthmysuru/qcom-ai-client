@@ -1,9 +1,9 @@
-import React, { useState } from "react";
 import { Notifications } from "@mui/icons-material";
+import React, { useState } from "react";
 import AlertBox from "../AlertBox/AlertBoxComponent";
-import './ExpandableAlertList.scss';
 import CustomButton from "../CustomButton/CustomButtonComponent";
 import SvgIcon from "../SvgIcons/SvgIconComponent";
+import './ExpandableAlertList.scss';
 
 // Define a type for the list item props
 interface ListItem {
@@ -15,10 +15,11 @@ interface ListItem {
 // Define the component props
 interface ExpandableListProps {
     items: ListItem[];
+    showHeader?: boolean;
     onAlertViewDetailsClick: () => void;
 }
 
-const ExpandableAlertList: React.FC<ExpandableListProps> = ({ items, onAlertViewDetailsClick }) => {
+const ExpandableAlertList: React.FC<ExpandableListProps> = ({ items, onAlertViewDetailsClick, showHeader = true }) => {
     const [expandedId, setExpandedId] = useState<number | null>(null);
 
     const handleClick = (id: number) => {
@@ -28,16 +29,21 @@ const ExpandableAlertList: React.FC<ExpandableListProps> = ({ items, onAlertView
     return (
         <section className="expandable-alert-list">
 
-            <header className="list-header">
-                <div>
-                    <h4>Alerts</h4>
-                </div>
+            {
+                showHeader && (
+                    <header className="list-header">
+                        <div>
+                            <h4>Alerts</h4>
+                        </div>
 
-                <aside className="actions">
-                    <CustomButton icon={<SvgIcon name='sort' width={16} height={16} />} variant='contained' />
-                    <CustomButton icon={<SvgIcon name='search' width={16} height={16} />} variant='contained' />
-                </aside>
-            </header>
+                        <aside className="actions">
+                            <CustomButton icon={<SvgIcon name='sort' width={16} height={16} />} variant='contained' />
+                            <CustomButton icon={<SvgIcon name='search' width={16} height={16} />} variant='contained' />
+                        </aside>
+                    </header>
+                )
+            }
+
             <aside className="list-content">
                 <ul>
                     {items.map((item: ListItem) => (

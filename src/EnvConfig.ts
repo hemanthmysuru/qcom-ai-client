@@ -25,11 +25,27 @@ const endPoints: { [key: string]: any } = {
             delete: '/{id}',
         }
     },
+    customAlertConfig: {
+        categoryUrl: 'config/custom-alert',
+        points: {
+            getAllCustomAlertConfig: '/camera/{id}',
+            addCustomAlertConfig: '/camera/{id}/all'
+        }
+    },
     alertConfig: {
         categoryUrl: 'config/alert',
         points: {
             getSafetyConfigList: '/camera/{cameraId}',
             updateSafetyConfig: '/{safetyConfigId}'
+        }
+    },
+    alert: {
+        categoryUrl: 'dashboard',
+        points: {
+            getAlertBannerCountList: '/alert',
+            getAllAlertsForCameraById: '/alert/{id}', // '/camera/{id}'
+            getAllAlerts: '/camera/alert', // this will be changed to '/alert/all'
+            getAllCameraDetails: '/camera'
         }
     }
 };

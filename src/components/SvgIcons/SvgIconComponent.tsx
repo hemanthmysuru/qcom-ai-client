@@ -4,7 +4,7 @@ export type iconNameTypes = 'analytics' | 'arrowDown' | 'arrowRight' | 'at' | 'b
     | 'location' | 'lock' | 'logoAndName' | 'logo' | 'maximize' | 'minimize' | 'play' | 'plus' | 'proximityAreaRectangle'
     | 'reset' | 'search' | 'sort' | 'user' | 'zoomIn' | 'zoomOut'
     | 'safetyInfractions' | 'ppeNoHardHat' | 'ppeNoSafetyVest' | 'ppeNoMask' | 'fallDetection' | 'proximityToRunningEquipment'
-    | 'footerLogo' | 'pin' | 'arrowDownBlue' | 'surveillanceCamera';
+    | 'footerLogo' | 'pin' | 'arrowDownBlue' | 'surveillanceCamera' | 'shapeRectangle';
 
 interface IconProps {
     name: iconNameTypes;
@@ -397,6 +397,12 @@ const SvgIcon: React.FC<IconProps> = ({ name, color, width, height }) => {
                         </defs>
                     </svg>
 
+                )
+            case 'shapeRectangle':
+                return (
+                    <svg width="23" height="14" viewBox="0 0 23 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.894444 0C0.657223 0 0.429718 0.0938632 0.261977 0.260941C0.0942359 0.428019 0 0.654625 0 0.890909V13.1091C0 13.3454 0.0942359 13.572 0.261977 13.7391C0.429718 13.9061 0.657223 14 0.894444 14H22.1056C22.3428 14 22.5703 13.9061 22.738 13.7391C22.9058 13.572 23 13.3454 23 13.1091V0.890909C23 0.654625 22.9058 0.428019 22.738 0.260941C22.5703 0.0938632 22.3428 0 22.1056 0H0.894444ZM1.78889 1.78182H21.2111V12.2182H1.78889V1.78182Z" fill="white" />
+                    </svg>
                 )
             // Add other cases for different icons here
             default:

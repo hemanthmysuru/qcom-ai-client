@@ -1,10 +1,11 @@
-// Define SCSS variables
 $checkbox-width: 40px; // Width for the checkbox
 $checkbox-height: 20px; // Height for the checkbox
 $background-color-checked: #3253dc; // Background color when checked
 $background-color-unchecked: #a6a8a8; // Background color when unchecked
 $circle-size: 16px; // Size of the sliding circle
 $circle-color: white; // Color of the sliding circle
+$disabled-opacity: 0.6;
+$disabled-cursor: not-allowed;
 
 .checkbox-container {
     display: inline-flex;
@@ -13,6 +14,11 @@ $circle-color: white; // Color of the sliding circle
     width: $checkbox-width;
     height: $checkbox-height;
     position: relative;
+
+    &.disabled {
+        opacity: $disabled-opacity;
+        cursor: $disabled-cursor;
+    }
 
     input {
         opacity: 0; // Hide the native checkbox

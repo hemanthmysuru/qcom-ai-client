@@ -1,4 +1,4 @@
-export type CameraConfigType = {
+export type CameraBaseDetailsType = {
     id?: string;
     cameraId?: string;
     cameraName: string;
@@ -7,6 +7,9 @@ export type CameraConfigType = {
     coordinateY: number;
     cameraAngle: number;
     fieldOfView: number;
+}
+
+export type CameraConfigType = CameraBaseDetailsType & {
     vmsLiveFeedUrl: string;
     primaryImageUrl: string;
     createdBy?: string;
@@ -14,3 +17,9 @@ export type CameraConfigType = {
     createdDate?: number;
     lastModifiedDate?: number;
 };
+
+
+export type CameraDetailsInFloorMapType = CameraBaseDetailsType & {
+    alertId: string;
+    totalAlerts: number;
+}

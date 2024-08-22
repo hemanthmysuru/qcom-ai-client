@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MainLayout from '../../layouts/MainLayout/MainLayout';
 import ExpandableAlertList from '../../components/ExpandableAlertList/ExpandableAlertList';
 import { Notifications, Settings } from '@mui/icons-material';
@@ -11,6 +11,7 @@ import ZoomablePage from '../../components/zoomable/ZoomablePage';
 import CameraView from '../../components/CameraView/CameraViewComponent';
 import AlertBox from '../../components/AlertBox/AlertBoxComponent';
 import SvgIcon from '../../components/SvgIcons/SvgIconComponent';
+import alertService from '../../sdk/services/alertService';
 
 
 const Expandableitems = [
@@ -28,16 +29,26 @@ const Expandableitems = [
 const eventCounterList: IEventCounter[] = [
     { count: 54, icon: 'safetyInfractions', name: 'Safety Infraction' },
     { count: 10, icon: 'ppeNoHardHat', name: 'PPE - No hard hat' },
-    { count: 54, icon: 'ppeNoSafetyVest', name: 'PPE - No safty vest' },
-    { count: 54, icon: 'ppeNoMask', name: 'PPE - No mask' },
+    { count: 12, icon: 'ppeNoSafetyVest', name: 'PPE - No safty vest' },
+    { count: 3, icon: 'ppeNoMask', name: 'PPE - No mask' },
     { count: 9, icon: 'fallDetection', name: 'Fall detection' },
-    { count: 188, icon: 'proximityToRunningEquipment', name: 'Proximity to run equipment' },
+    { count: 19, icon: 'proximityToRunningEquipment', name: 'Proximity to run equipment' },
 ];
 
 const AlertsPage: React.FC = () => {
     const { openDialog, handleOpenDialog, handleCloseDialog, handleCancelDialog, handleSaveDialog } = useCustomDialogHandler();
 
     const [selectedCamView, setSelectedCamView] = useState<string>();
+
+    useEffect(() => {
+        const handleGetFloorMapCameraDetails = async () => {
+            const response = await alertService.getAllFloorMapCameraDetails();
+            const alertresponse = await alertService.getAllAlerts();
+            console.log(response, alertresponse);
+        }
+
+        handleGetFloorMapCameraDetails();
+    }, []);
 
     const handleAlertViewDetailsClick = () => {
         handleOpenDialog();
@@ -51,7 +62,14 @@ const AlertsPage: React.FC = () => {
 
     const dialogContent = (
         <section className="dialog-content">
-            <aside className='side-content'>{listContent}</aside>
+            <aside className='side-content'>
+                {
+                    <ExpandableAlertList
+                        items={Expandableitems}
+                        showHeader={false}
+                        onAlertViewDetailsClick={handleAlertViewDetailsClick} />
+                }
+            </aside>
             <div className="main-content">
                 <p>Main content goes here...................!</p>
             </div>
@@ -129,10 +147,10 @@ const AlertsPage: React.FC = () => {
             <EventCountBar countList={eventCounterList} />
 
             <CustomDialog
-                headerLabel='Header label'
+                headerLabel='Cam ID - Camera #1 - PPE - No Hard Hat'
                 open={openDialog}
                 content={dialogContent}
-                dialogMaxWidth='md'
+                dialogMaxWidth='lg'
                 cancelText="Cancel"
                 saveText="Save"
                 onClose={handleCloseDialog}

@@ -1,5 +1,6 @@
 import SHA256 from 'crypto-js/sha256';
 import { enc } from 'crypto-js';
+import { CoordinateType } from '../sdk/types/customAlertConfig.type';
 
 export const hashPassword = (password: string): string => {
     return SHA256(password).toString(enc.Hex);
@@ -8,6 +9,20 @@ export const hashPassword = (password: string): string => {
 export const calculateCamSizeBasedOnImageWidth = (imageWidth: number): number => {
     return imageWidth / 26;
 };
+
+export const updateCoordinateListFromPercentageToScale = (coordinateList: { x: number; y: number }[]): { coordinateX: number; coordinateY: number }[] => {
+    return coordinateList.map(coordinate => ({
+        coordinateX: percentageToScale(coordinate.x.toString()),
+        coordinateY: percentageToScale(coordinate.y.toString())
+    }))
+}
+
+export const updateCoordinateListFromScaleToPercentage = (coordinateList: { coordinateX: string; coordinateY: string }[]): { x: number; y: number }[] => {
+    return coordinateList.map(coordinate => ({
+        x: parseFloat(scaleToPercentage(parseFloat(coordinate.coordinateX))),
+        y: parseFloat(scaleToPercentage(parseFloat(coordinate.coordinateY)))
+    }))
+}
 
 // Convert from percentage string to 0.1 to 1.0 scale
 export const percentageToScale = (value: string): number => {

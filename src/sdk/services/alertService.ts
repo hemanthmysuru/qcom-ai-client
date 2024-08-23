@@ -56,6 +56,22 @@ class AlertService {
         // return mockAlertConfigList;
     }
 
+    // will be used for resolved and delete the alerts
+    public async updateAlert(resolved: boolean, deleted: boolean): Promise<any> {
+        try {
+            const payload = {
+                resolved: resolved,
+                deleted: deleted,
+                remarks: "Alert resolved and deleted"
+            }
+            const url = validateEndpoint(this.endPoints, this.endPointCategory, 'updateAlert');
+            return await apiService.put(url, payload);
+        } catch (error) {
+            console.error('Error getting safety configuration:', error);
+            throw error;
+        }
+    }
+
 }
 
 const alertService = new AlertService();

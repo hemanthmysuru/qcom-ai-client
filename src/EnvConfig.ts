@@ -46,7 +46,8 @@ const endPoints: { [key: string]: any } = {
             getAllAlertsForCameraById: '/alert/{id}', // '/camera/{id}'
             getAllAlerts: '/alert', // this will be changed to '/alert/all'
             getAllCameraDetailsForFloorMap: '/camera',
-            getAlertByCameraId: '/alert/camera/{cameraId}'
+            getAlertByCameraId: '/alert/camera/{cameraId}',
+            updateAlert: '/alert/{alertId}'
         }
     }
 };

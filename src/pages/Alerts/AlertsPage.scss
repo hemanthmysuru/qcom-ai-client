@@ -33,14 +33,14 @@
 .dialog-content {
     @include flex-row(space-between);
     align-items: flex-start;
-    height: 100%;
+    height: calc(100vh - 192px);
     overflow: hidden;
-    height: calc(100vh - 180px);
+    max-height: 680px;
     column-gap: 16px;
     padding: $padding;
 
-    .side-content .expandable-alert-list,
-    .main-content {
+    // .main-content,
+    .side-content .expandable-alert-list {
         // background-color: var(--dialogbox-content-bg-color);
         background-color: #3b3a3a;
         border-radius: 4px;
@@ -50,13 +50,17 @@
         width: 340px;
         overflow-y: auto;
         height: 100%;
-        @include thin-scrollbar(var(--primary-color), var(--dialogbox-content-bg-color), var(--primary-color-dark));
 
         .expandable-alert-list {
             padding: 16px;
             // padding: 0px 16px 16px 16px;
             .list-content {
                 height: 100%;
+                @include thin-scrollbar(
+                    var(--primary-color),
+                    var(--dialogbox-content-bg-color),
+                    var(--primary-color-dark)
+                );
                 // padding: 0px 16px 16px 16px;
                 // padding: 16px;
 
@@ -82,6 +86,49 @@
     .main-content {
         width: calc(100% - 340px);
         color: white;
-        padding: 16px;
+        height: 100%;
+        // padding: 16px;
+
+        .grid-container {
+            display: grid;
+            width: 100%;
+            height: 100%;
+            grid-template-columns: repeat(2, 1fr); // Creates 2 columns of equal width
+            grid-template-rows: repeat(2, 1fr); // Creates 2 rows of equal height
+            gap: 16px; // Adds space between grid items
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            &.inner-grid {
+                width: 100%;
+            }
+            .grid-item {
+                // border: 1px solid white;
+                @include flex-row();
+                // aspect-ratio: 1 / 1;
+                color: white;
+                background: #222222;
+
+                &.nested-grid {
+                    background: transparent;
+                }
+
+                &.live-feed,
+                &.recording,
+                &.incident-images {
+                    figure {
+                        width: 100%;
+                        height: 100%;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

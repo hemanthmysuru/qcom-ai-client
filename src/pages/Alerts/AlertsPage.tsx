@@ -12,6 +12,9 @@ import CameraView from '../../components/CameraView/CameraViewComponent';
 import AlertBox from '../../components/AlertBox/AlertBoxComponent';
 import SvgIcon from '../../components/SvgIcons/SvgIconComponent';
 import alertService from '../../sdk/services/alertService';
+import { scaleToPercentage } from '../../utils/common.util';
+import SurveillanceCamera from '../../components/SurveillanceCamera/SurveillanceCameraComponent';
+import incidentImage from '../../assets/images/incident-image.png';
 
 
 const Expandableitems = [
@@ -60,6 +63,20 @@ const AlertsPage: React.FC = () => {
         </>
     );
 
+    const cameraZoneRenderer = (
+        <ZoomablePage
+            components={[
+                {
+                    component: (
+                        <SurveillanceCamera />
+                    ), position: { x: scaleToPercentage(0.3), y: scaleToPercentage(0.9) }
+                }
+            ]}
+            showZoomControls={false}
+            isImageDraggable={false}
+            isCamCreationAllowed={false} />
+    )
+
     const dialogContent = (
         <section className="dialog-content">
             <aside className='side-content'>
@@ -71,7 +88,44 @@ const AlertsPage: React.FC = () => {
                 }
             </aside>
             <div className="main-content">
-                <p>Main content goes here...................!</p>
+                {/* <p>Main content goes here...................!</p> */}
+                <ul className='grid-container'>
+                    <li className='grid-item live-feed'>
+                        <figure>
+                            <img src={incidentImage} />
+                        </figure>
+                    </li>
+                    <li className='grid-item recording'>
+                        <figure>
+                            <img src={incidentImage} />
+                        </figure>
+                    </li>
+                    <li className='grid-item nested-grid'>
+                        <ol className='grid-container inner-grid'>
+                            <li className='grid-item incident-images'>
+                                <figure>
+                                    <img src={incidentImage} />
+                                </figure>
+                            </li>
+                            <li className='grid-item incident-images'>
+                                <figure>
+                                    <img src={incidentImage} />
+                                </figure>
+                            </li>
+                            <li className='grid-item incident-images'>
+                                <figure>
+                                    <img src={incidentImage} />
+                                </figure>
+                            </li>
+                            <li className='grid-item incident-images'>
+                                <figure>
+                                    <img src={incidentImage} />
+                                </figure>
+                            </li>
+                        </ol>
+                    </li>
+                    <li className='grid-item'>{cameraZoneRenderer}</li>
+                </ul>
             </div>
         </section>
     );

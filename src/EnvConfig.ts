@@ -42,10 +42,11 @@ const endPoints: { [key: string]: any } = {
     alert: {
         categoryUrl: 'dashboard',
         points: {
-            getAlertBannerCountList: '/alert',
+            getAlertBannerCountList: '/alerttype',
             getAllAlertsForCameraById: '/alert/{id}', // '/camera/{id}'
-            getAllAlerts: '/camera/alert', // this will be changed to '/alert/all'
-            getAllCameraDetails: '/camera'
+            getAllAlerts: '/alert', // this will be changed to '/alert/all'
+            getAllCameraDetailsForFloorMap: '/camera',
+            getAlertByCameraId: '/alert/camera/{cameraId}'
         }
     }
 };
@@ -81,7 +82,7 @@ const envConfigDetails: Record<EnvName, IEnvConfig> = {
 };
 
 // Safely get the current environment with a fallback
-const currentEnv: EnvName = (process.env.NODE_ENV as EnvName) ?? 'development';
+const currentEnv: EnvName = (process.env.REACT_APP_ENV as EnvName) ?? 'development';
 
 // Export the configuration based on the current environment
 const envConfig: IEnvConfig = envConfigDetails[currentEnv];

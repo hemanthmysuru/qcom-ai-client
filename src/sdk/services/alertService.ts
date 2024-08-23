@@ -44,7 +44,7 @@ class AlertService {
 
     public async getAllFloorMapCameraDetails(): Promise<CameraDetailsInFloorMapType[]> {
         try {
-            const url = validateEndpoint(this.endPoints, this.endPointCategory, 'getAllCameraDetails')
+            const url = validateEndpoint(this.endPoints, this.endPointCategory, 'getAllCameraDetailsForFloorMap')
             return await apiService.get(url);
         } catch (error) {
             console.error('Error getting safety configuration:', error);

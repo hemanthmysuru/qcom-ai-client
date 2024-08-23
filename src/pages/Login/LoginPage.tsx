@@ -24,7 +24,7 @@ const LoginPage: React.FC = () => {
 
     // Auto-fill login credentials in development mode
     useEffect(() => {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.REACT_APP_ENV === 'development') {
             setEmail(autoFeedLoginCreds.emailId);
             setPassword(autoFeedLoginCreds.password);
         }
